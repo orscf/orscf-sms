@@ -176,7 +176,7 @@ public class SystemConnection {
   public Guid OwnerInstituteUid { get; set; }
 
   [Required]
-  public String HierSpäterJWTSEttings { get; set; }
+  public String JwtSettings { get; set; }
 
   [Required]
   public Guid TargetSystemEndpointUid { get; set; }

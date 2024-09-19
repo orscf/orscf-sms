@@ -470,7 +470,7 @@ active | administratively-completed | approved | closed-to-accrual | closed-to-a
           <Property Name="SystemConnectionUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <NavigationProperty Name="OwnerInstitute" Relationship="DomainModel.InstituteApiConnection" FromRole="ApiConnection" ToRole="Institute" />
           <Property Name="OwnerInstituteUid" Type="Guid" Nullable="false" />
-          <Property Name="HierSpäterJWTSEttings" Type="String" Nullable="false" />
+          <Property Name="JwtSettings" Type="String" Nullable="false" />
           <NavigationProperty Name="TargetEndpoint" Relationship="DomainModel.SystemEndpointApiConnection" FromRole="ApiConnection" ToRole="SystemEndpoint" />
           <Property Name="TargetSystemEndpointUid" Type="Guid" Nullable="false" />
           <NavigationProperty Name="DedicatedSiteRelatedSystemAssignment" Relationship="DomainModel.SiteRelatedSystemAssignmentSystemConnection" FromRole="SystemConnection" ToRole="SiteRelatedSystemAssignment" />
@@ -584,7 +584,7 @@ active | administratively-completed | approved | closed-to-accrual | closed-to-a
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1e673f0774584ac2be5350aef5de4487" Name="Schema" ZoomLevel="73">
+      <Diagram DiagramId="1e673f0774584ac2be5350aef5de4487" Name="Schema" ZoomLevel="95">
         <EntityTypeShape EntityType="DomainModel.ResearchStudy" Width="2.5" PointX="7.375" PointY="5.375" FillColor="255, 255, 192" />
         <EntityTypeShape EntityType="DomainModel.Institute" Width="2.25" PointX="11.5" PointY="2.625" FillColor="255, 255, 192" />
         <AssociationConnector Association="DomainModel.InstituteResearchStudy" />

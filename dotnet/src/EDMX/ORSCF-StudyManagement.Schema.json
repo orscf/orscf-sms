@@ -1,7 +1,7 @@
 {
   "DescriptionFormat": "v1.0",
   "TimestampUtc": "2024-09-15T00:00:00.0000000Z",
-  "SemanticVersion": "1.6.0",
+  "SemanticVersion": "2.0.0",
   "Entities": [
     {
       "Name": "Institute",
@@ -846,7 +846,7 @@
           "DbGeneratedIdentity": false
         },
         {
-          "Name": "HierSpäterJWTSEttings",
+          "Name": "JwtSettings",
           "Type": "String",
           "MaxLength": 0,
           "Summary": "",

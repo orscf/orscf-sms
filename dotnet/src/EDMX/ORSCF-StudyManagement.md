@@ -4,8 +4,8 @@
 |----------|-----------------------------------------|
 |author:   |[ORSCF](https://www.orscf.org) ("Open Research Study Communication Formats") / T.Korn|
 |license:  |[Apache-2](https://choosealicense.com/licenses/apache-2.0/)|
-|version:  |1.6.0|
-|timestamp:|2022-01-23 00:00|
+|version:  |2.0.0|
+|timestamp:|2024-09-15 00:00|
 
 ### Contents
 
@@ -135,7 +135,7 @@ Addressed by: [SystemEndpointUid](#InstituteRelatedSystemAssignmentSystemEndpoin
 | ---- | ---- | -------- | --- |
 | [SystemConnectionUid](#SystemConnectionSystemConnectionUid-Field) **(PK)** | *guid* | YES | no |
 | [OwnerInstituteUid](#SystemConnectionOwnerInstituteUid-Field) (FK) | *guid* | YES | no |
-| HierSpäterJWTSEttings | *string* | YES | no |
+| JwtSettings | *string* | YES | no |
 | [TargetSystemEndpointUid](#SystemConnectionTargetSystemEndpointUid-Field) (FK) | *guid* | YES | no |
 | [DedicatedSiteRelatedSystemAssignmentUid](#SystemConnectionDedicatedSiteRelatedSystemAssignmentUid-Field) (FK) | *guid* | no | no |
 #### Unique Keys

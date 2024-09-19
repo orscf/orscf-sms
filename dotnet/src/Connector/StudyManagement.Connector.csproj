@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>ORSCF.StudyManagement.Connector</AssemblyName>
     <RootNamespace>MedicalResearch.StudyManagement</RootNamespace>
     <ApplicationIcon></ApplicationIcon>
@@ -10,8 +10,8 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/orscf/orscf-connectors</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/orscf/orscf-connectors</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/orscf/orscf-sms</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/orscf/orscf-sms</RepositoryUrl>
     <Copyright>ORSCF.org</Copyright>
     <Company>ORSCF.org</Company>
     <Authors>ORSCF.org</Authors>
@@ -20,17 +20,17 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\..\(Stage)\Bin</OutputPath>
+    <OutputPath>..\..\dist\bin-net6.0</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <DocumentationFile>..\..\..\(Stage)\Bin\ORSCF.StudyManagement.Connector.xml</DocumentationFile>
+    <DocumentationFile>..\..\dist\bin-net6.0\ORSCF.StudyManagement.Connector.xml</DocumentationFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\..\(Stage)\Bin</OutputPath>
+    <OutputPath>..\..\dist\bin-net6.0</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <DocumentationFile>..\..\..\(Stage)\Bin\ORSCF.StudyManagement.Connector.xml</DocumentationFile>
+    <DocumentationFile>..\..\dist\bin-net6.0\ORSCF.StudyManagement.Connector.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
   
@@ -42,11 +42,14 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="EntityAnnotations" Version="2.4.0.551" />
-    <PackageReference Include="kGEN.Generator" Version="1.4.2.593" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="EntityAnnotations" Version="4.0.3" />
+    <PackageReference Include="FUSE-fx.RepositoryContract" Version="0.3.11" />
+    <PackageReference Include="kGEN.Generator" Version="1.5.0.853" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SmartAmbience" Version="2.1.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="UJMW.DynamicClient" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>

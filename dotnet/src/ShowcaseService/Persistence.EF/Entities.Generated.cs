@@ -19,10 +19,10 @@ public class InstituteEntity {
   [Required]
   public Boolean IsArchived { get; set; }
 
-  [Referer]
+  [Referrer]
   public virtual ObservableCollection<ResearchStudyEntity> InitiatedStudies { get; set; } = new ObservableCollection<ResearchStudyEntity>();
 
-  [Referer]
+  [Referrer]
   public virtual ObservableCollection<SiteEntity> RepresentedSites { get; set; } = new ObservableCollection<SiteEntity>();
 
   [Dependent]
@@ -245,7 +245,7 @@ public class SiteEntity {
   [Lookup]
   public virtual InstituteEntity RepresentingInstitute { get; set; }
 
-  [Referer]
+  [Referrer]
   public virtual ObservableCollection<InvolvementRoleEntity> SiteDedicatedInvolvementRoles { get; set; } = new ObservableCollection<InvolvementRoleEntity>();
 
   [Principal]
@@ -338,13 +338,13 @@ public class SystemEndpointEntity {
   [Principal]
   public virtual InstituteEntity ProviderInstitute { get; set; }
 
-  [Referer]
+  [Referrer]
   public virtual ObservableCollection<InstituteRelatedSystemAssignmentEntity> InstituteAssignments { get; set; } = new ObservableCollection<InstituteRelatedSystemAssignmentEntity>();
 
-  [Referer]
+  [Referrer]
   public virtual ObservableCollection<SiteRelatedSystemAssignmentEntity> SiteAssignments { get; set; } = new ObservableCollection<SiteRelatedSystemAssignmentEntity>();
 
-  [Referer]
+  [Referrer]
   public virtual ObservableCollection<StudyRelatedSystemAssignmentEntity> StudyAssignments { get; set; } = new ObservableCollection<StudyRelatedSystemAssignmentEntity>();
 
 #region Mapping
@@ -485,7 +485,7 @@ public class SystemConnectionEntity {
   public Guid OwnerInstituteUid { get; set; }
 
   [Required]
-  public String HierSpäterJWTSEttings { get; set; }
+  public String JwtSettings { get; set; }
 
   [Required]
   public Guid TargetSystemEndpointUid { get; set; }
@@ -507,7 +507,7 @@ public class SystemConnectionEntity {
   internal static Expression<Func<SystemConnection, SystemConnectionEntity>> SystemConnectionEntitySelector = ((SystemConnection src) => new SystemConnectionEntity {
     SystemConnectionUid = src.SystemConnectionUid,
     OwnerInstituteUid = src.OwnerInstituteUid,
-    HierSpäterJWTSEttings = src.HierSpäterJWTSEttings,
+    JwtSettings = src.JwtSettings,
     TargetSystemEndpointUid = src.TargetSystemEndpointUid,
     DedicatedSiteRelatedSystemAssignmentUid = src.DedicatedSiteRelatedSystemAssignmentUid,
   });
@@ -515,7 +515,7 @@ public class SystemConnectionEntity {
   internal static Expression<Func<SystemConnectionEntity, SystemConnection>> SystemConnectionSelector = ((SystemConnectionEntity src) => new SystemConnection {
     SystemConnectionUid = src.SystemConnectionUid,
     OwnerInstituteUid = src.OwnerInstituteUid,
-    HierSpäterJWTSEttings = src.HierSpäterJWTSEttings,
+    JwtSettings = src.JwtSettings,
     TargetSystemEndpointUid = src.TargetSystemEndpointUid,
     DedicatedSiteRelatedSystemAssignmentUid = src.DedicatedSiteRelatedSystemAssignmentUid,
   });
@@ -523,7 +523,7 @@ public class SystemConnectionEntity {
   internal void CopyContentFrom(SystemConnection source, Func<String,bool> onFixedValueChangingCallback = null){
     this.SystemConnectionUid = source.SystemConnectionUid;
     this.OwnerInstituteUid = source.OwnerInstituteUid;
-    this.HierSpäterJWTSEttings = source.HierSpäterJWTSEttings;
+    this.JwtSettings = source.JwtSettings;
     this.TargetSystemEndpointUid = source.TargetSystemEndpointUid;
     this.DedicatedSiteRelatedSystemAssignmentUid = source.DedicatedSiteRelatedSystemAssignmentUid;
   }
@@ -531,7 +531,7 @@ public class SystemConnectionEntity {
   internal void CopyContentTo(SystemConnection target, Func<String,bool> onFixedValueChangingCallback = null){
     target.SystemConnectionUid = this.SystemConnectionUid;
     target.OwnerInstituteUid = this.OwnerInstituteUid;
-    target.HierSpäterJWTSEttings = this.HierSpäterJWTSEttings;
+    target.JwtSettings = this.JwtSettings;
     target.TargetSystemEndpointUid = this.TargetSystemEndpointUid;
     target.DedicatedSiteRelatedSystemAssignmentUid = this.DedicatedSiteRelatedSystemAssignmentUid;
   }
@@ -555,7 +555,7 @@ public class InvolvedPersonEntity {
   [Required]
   public Boolean IsArchived { get; set; }
 
-  [Referer]
+  [Referrer]
   public virtual ObservableCollection<InvolvementRoleEntity> InvolvementRoles { get; set; } = new ObservableCollection<InvolvementRoleEntity>();
 
 #region Mapping
@@ -747,7 +747,7 @@ public class SiteRelatedSystemAssignmentEntity {
   [Lookup]
   public virtual SystemEndpointEntity SystemEndpoint { get; set; }
 
-  [Referer]
+  [Referrer]
   public virtual ObservableCollection<SystemConnectionEntity> DedicatedSystemConnection { get; set; } = new ObservableCollection<SystemConnectionEntity>();
 
 #region Mapping

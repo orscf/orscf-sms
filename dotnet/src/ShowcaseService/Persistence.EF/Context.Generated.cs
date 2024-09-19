@@ -4,10 +4,10 @@ using MedicalResearch.StudyManagement.Persistence;
 
 namespace MedicalResearch.StudyManagement.Persistence.EF {
 
-  /// <summary> EntityFramework DbContext (based on schema version '1.6.0') </summary>
+  /// <summary> EntityFramework DbContext (based on schema version '2.0.0') </summary>
   public partial class StudyManagementDbContext : DbContext{
 
-    public const String SchemaVersion = "1.6.0";
+    public const String SchemaVersion = "2.0.0";
 
     public DbSet<InstituteEntity> Institutes { get; set; }
 

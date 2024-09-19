@@ -15,6 +15,8 @@ using MedicalResearch.StudyManagement.StoreAccess;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.OpenApi.Writers;
 using MedicalResearch.StudyManagement.Model;
+using System.Data.Fuse;
+using System.Data.Fuse.Convenience;
 
 namespace MedicalResearch.StudyManagement {
 
@@ -40,6 +42,16 @@ namespace MedicalResearch.StudyManagement {
       //StudyManagementDbContext.Migrate();
 
       string outDir = AppDomain.CurrentDomain.BaseDirectory;
+
+
+      var y = new System.Data.Fuse.Ef.EfRepository<Institute, Guid>()
+
+      var x = new DynamicRepositoryFacade<Institute, Guid>()
+
+
+        services.AddSingleton<IInstituteStore, InstituteStore>();
+
+
 
       //services.AddSingleton<IInstitutes, InstituteStore>();
       //services.AddSingleton<IResearchStudies, ResearchStudyStore>();

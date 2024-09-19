@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace MedicalResearch.StudyManagement.WebAPI {
+namespace MedicalResearch.StudyManagement {
 
   public class Program {
 

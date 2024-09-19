@@ -1,0 +1,618 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="DataModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DomainModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ResearchStudies" EntityType="DomainModel.ResearchStudy" />
+          <EntitySet Name="Institutes" EntityType="DomainModel.Institute" />
+          <AssociationSet Name="InstituteResearchStudy" Association="DomainModel.InstituteResearchStudy">
+            <End Role="Institute" EntitySet="Institutes" />
+            <End Role="ResearchStudy" EntitySet="ResearchStudies" />
+          </AssociationSet>
+          <EntitySet Name="Sites" EntityType="DomainModel.Site" />
+          <AssociationSet Name="InstituteSiteParticipation" Association="DomainModel.InstituteSiteParticipation">
+            <End Role="Institute" EntitySet="Institutes" />
+            <End Role="SiteParticipation" EntitySet="Sites" />
+          </AssociationSet>
+          <AssociationSet Name="ResearchStudySiteParticipation" Association="DomainModel.ResearchStudySiteParticipation">
+            <End Role="ResearchStudy" EntitySet="ResearchStudies" />
+            <End Role="SiteParticipation" EntitySet="Sites" />
+          </AssociationSet>
+          <EntitySet Name="InvolvementRoles" EntityType="DomainModel.InvolvementRole" />
+          <AssociationSet Name="ResearchStudyStudyRelatedPerson" Association="DomainModel.ResearchStudyStudyRelatedPerson">
+            <End Role="ResearchStudy" EntitySet="ResearchStudies" />
+            <End Role="StudyRelatedPerson" EntitySet="InvolvementRoles" />
+          </AssociationSet>
+          <AssociationSet Name="SiteStudyPersonAssignments" Association="DomainModel.SiteStudyPersonAssignments">
+            <End Role="Site" EntitySet="Sites" />
+            <End Role="StudyPersonAssignments" EntitySet="InvolvementRoles" />
+          </AssociationSet>
+          <EntitySet Name="InvolvedPersons" EntityType="DomainModel.InvolvedPerson" />
+          <AssociationSet Name="InvolvedPersonInvolvedPersonRoles" Association="DomainModel.InvolvedPersonInvolvedPersonRoles">
+            <End Role="InvolvedPerson" EntitySet="InvolvedPersons" />
+            <End Role="InvolvedPersonRoles" EntitySet="InvolvementRoles" />
+          </AssociationSet>
+          <EntitySet Name="SystemEndpoints" EntityType="DomainModel.SystemEndpoint" />
+          <AssociationSet Name="InstituteSystemEndpoint" Association="DomainModel.InstituteSystemEndpoint">
+            <End Role="Institute" EntitySet="Institutes" />
+            <End Role="SystemEndpoint" EntitySet="SystemEndpoints" />
+          </AssociationSet>
+          <EntitySet Name="SiteRelatedSystemAssignments" EntityType="DomainModel.SiteRelatedSystemAssignment" />
+          <AssociationSet Name="SystemEndpointSystemAccessingSite" Association="DomainModel.SystemEndpointSystemAccessingSite">
+            <End Role="SystemEndpoint" EntitySet="SystemEndpoints" />
+            <End Role="SystemAccessingSite" EntitySet="SiteRelatedSystemAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="SiteSiteApiBinding" Association="DomainModel.SiteSiteApiBinding">
+            <End Role="Site" EntitySet="Sites" />
+            <End Role="SiteApiBinding" EntitySet="SiteRelatedSystemAssignments" />
+          </AssociationSet>
+          <EntitySet Name="InstituteRelatedSystemAssignments" EntityType="DomainModel.InstituteRelatedSystemAssignment" />
+          <AssociationSet Name="SystemEndpointInstituteApiAssignment" Association="DomainModel.SystemEndpointInstituteApiAssignment">
+            <End Role="SystemEndpoint" EntitySet="SystemEndpoints" />
+            <End Role="InstituteApiAssignment" EntitySet="InstituteRelatedSystemAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="InstituteInstituteApiAssignment" Association="DomainModel.InstituteInstituteApiAssignment">
+            <End Role="Institute" EntitySet="Institutes" />
+            <End Role="InstituteApiAssignment" EntitySet="InstituteRelatedSystemAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="SystemEndpointResearchStudy" Association="DomainModel.SystemEndpointResearchStudy">
+            <End Role="SystemEndpoint" EntitySet="SystemEndpoints" />
+            <End Role="ResearchStudy" EntitySet="ResearchStudies" />
+          </AssociationSet>
+          <EntitySet Name="SystemConnections" EntityType="DomainModel.SystemConnection" />
+          <AssociationSet Name="InstituteApiConnection" Association="DomainModel.InstituteApiConnection">
+            <End Role="Institute" EntitySet="Institutes" />
+            <End Role="ApiConnection" EntitySet="SystemConnections" />
+          </AssociationSet>
+          <AssociationSet Name="SystemEndpointApiConnection" Association="DomainModel.SystemEndpointApiConnection">
+            <End Role="SystemEndpoint" EntitySet="SystemEndpoints" />
+            <End Role="ApiConnection" EntitySet="SystemConnections" />
+          </AssociationSet>
+          <AssociationSet Name="SiteRelatedSystemAssignmentSystemConnection" Association="DomainModel.SiteRelatedSystemAssignmentSystemConnection">
+            <End Role="SiteRelatedSystemAssignment" EntitySet="SiteRelatedSystemAssignments" />
+            <End Role="SystemConnection" EntitySet="SystemConnections" />
+          </AssociationSet>
+          <EntitySet Name="StudyRelatedSystemAssignments" EntityType="DomainModel.StudyRelatedSystemAssignment" />
+          <AssociationSet Name="ResearchStudyStudyRelatedSystemAssignment" Association="DomainModel.ResearchStudyStudyRelatedSystemAssignment">
+            <End Role="ResearchStudy" EntitySet="ResearchStudies" />
+            <End Role="StudyRelatedSystemAssignment" EntitySet="StudyRelatedSystemAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="SystemEndpointStudyRelatedSystemAssignment" Association="DomainModel.SystemEndpointStudyRelatedSystemAssignment">
+            <End Role="SystemEndpoint" EntitySet="SystemEndpoints" />
+            <End Role="StudyRelatedSystemAssignment" EntitySet="StudyRelatedSystemAssignments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ResearchStudy">
+          <Documentation>
+            <Summary>entity, which relates to &lt;see href="https://www.hl7.org/fhir/researchstudy.html"&gt;HL7.ResearchStudy&lt;/see&gt;</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ResearchStudyUid" />
+          </Key>
+          <Property Name="ResearchStudyUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+            <Documentation>
+              <Summary>An &lt;see href="https://de.wikipedia.org/wiki/Universally_Unique_Identifier"&gt;Universally Unique Identifier&lt;/see&gt; which can be generated by any origin system and is used to address this ORSCF conform data record in decentralized environments. Note that this Identity must not be changed any more!</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DisplayLabel" Type="String" Nullable="false" MaxLength="100" >
+            <Documentation>
+              <Summary>An DisplayLabel which is dedicated for the usage within the frontend of study managent software. Note that this short name representation hat the caracter of an internal shortcurt and could be ambiguous. The usage for legal-relevant/official communication or documents is not recommended, as well as the usage for technical identification of this record.</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="InitiatorInstitute" Relationship="DomainModel.InstituteResearchStudy" FromRole="ResearchStudy" ToRole="Institute" />
+          <Property Name="InitiatorInstituteUid" Type="Guid" Nullable="false" />
+          <Property Name="StudyWorkflowName" Type="String" Nullable="false" />
+          <Property Name="StudyWorkflowVersion" Type="String" Nullable="false" />
+          <Property Name="Phase" Type="String" Nullable="true" >
+            <Documentation>
+              <Summary>AS DECLARED BY &lt;see href="https://www.hl7.org/fhir/valueset-research-study-phase.html"&gt;HL7.ResearchStudyPhase&lt;/see&gt;:
+n-a | early-phase-1 | phase-1 | phase-1-phase-2 | phase-2 | phase-2-phase-3 | phase-3 | phase-4</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="StartDate" Type="DateTime" Nullable="true" >
+            <Documentation>
+              <Summary>a estimated date in future is possible</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="TerminationDate" Type="DateTime" Nullable="true" >
+            <Documentation>
+              <Summary>a estimated date in future is possible</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Sites" Relationship="DomainModel.ResearchStudySiteParticipation" FromRole="ResearchStudy" ToRole="SiteParticipation" />
+          <Property Name="SubjectIdentifierTitle" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>A title which informs about the sematic of the SubjectIdentifer (which concrete value is used): "Randomization-Number", "Screening-Number", ...</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Status" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>AS DECLARED BY &lt;see href="https://www.hl7.org/fhir/valueset-research-study-status.html"&gt;HL7.ResearchStudyStatus&lt;/see&gt;:
+active | administratively-completed | approved | closed-to-accrual | closed-to-accrual-and-intervention | completed | disapproved | in-review | temporarily-closed-to-accrual | temporarily-closed-to-accrual-and-intervention | withdrawn</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="TerminatedReason" Type="String" Nullable="true" />
+          <Property Name="IsArchived" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <NavigationProperty Name="InvolvementRoles" Relationship="DomainModel.ResearchStudyStudyRelatedPerson" FromRole="ResearchStudy" ToRole="StudyRelatedPerson" />
+          <Property Name="InitiatorRelatedProjectNumber" Type="String" Nullable="true" />
+          <NavigationProperty Name="OriginWdr" Relationship="DomainModel.SystemEndpointResearchStudy" FromRole="ResearchStudy" ToRole="SystemEndpoint" />
+          <Property Name="OriginWdrEndpointUid" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="SystemAssignments" Relationship="DomainModel.ResearchStudyStudyRelatedSystemAssignment" FromRole="ResearchStudy" ToRole="StudyRelatedSystemAssignment" />
+        </EntityType>
+        <EntityType Name="Institute">
+          <Key>
+            <PropertyRef Name="InstituteUid" />
+          </Key>
+          <Property Name="InstituteUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+            <Documentation>
+              <Summary>An &lt;see href="https://de.wikipedia.org/wiki/Universally_Unique_Identifier"&gt;Universally Unique Identifier&lt;/see&gt; which can be generated by any origin system and is used to address this ORSCF conform data record in decentralized environments. Note that this Identity must not be changed any more!</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="InitiatedStudies" Relationship="DomainModel.InstituteResearchStudy" FromRole="Institute" ToRole="ResearchStudy" />
+          <Property Name="DisplayLabel" Type="String" Nullable="false" MaxLength="100" >
+            <Documentation>
+              <Summary>An DisplayLabel which is dedicated for the usage within the frontend of study managent software. Note that this short name representation hat the caracter of an internal shortcurt and could be ambiguous. The usage for legal-relevant/official communication or documents is not recommended, as well as the usage for technical identification of this record.</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="RepresentedSites" Relationship="DomainModel.InstituteSiteParticipation" FromRole="Institute" ToRole="SiteParticipation" />
+          <Property Name="IsArchived" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <NavigationProperty Name="ProvidedSystemEndpoints" Relationship="DomainModel.InstituteSystemEndpoint" FromRole="Institute" ToRole="SystemEndpoint" />
+          <NavigationProperty Name="SystemAssignment" Relationship="DomainModel.InstituteInstituteApiAssignment" FromRole="Institute" ToRole="InstituteApiAssignment" />
+          <NavigationProperty Name="SystemConnections" Relationship="DomainModel.InstituteApiConnection" FromRole="Institute" ToRole="ApiConnection" />
+        </EntityType>
+        <Association Name="InstituteResearchStudy">
+          <End Type="DomainModel.Institute" Role="Institute" Multiplicity="1" />
+          <End Type="DomainModel.ResearchStudy" Role="ResearchStudy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institute">
+              <PropertyRef Name="InstituteUid" />
+            </Principal>
+            <Dependent Role="ResearchStudy">
+              <PropertyRef Name="InitiatorInstituteUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="SiteUid" />
+          </Key>
+          <Property Name="SiteUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+            <Documentation>
+              <Summary>An &lt;see href="https://de.wikipedia.org/wiki/Universally_Unique_Identifier"&gt;Universally Unique Identifier&lt;/see&gt; which can be generated by any origin system and is used to address this ORSCF conform data record in decentralized environments. Note that this Identity must not be changed any more!</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="RepresentingInstitute" Relationship="DomainModel.InstituteSiteParticipation" FromRole="SiteParticipation" ToRole="Institute" />
+          <Property Name="RepresentingInstituteUid" Type="Guid" Nullable="false" >
+            <Documentation>
+              <Summary>&lt;see href="https://de.wikipedia.org/wiki/Universally_Unique_Identifier"&gt;Universally Unique Identifier&lt;/see&gt; of the institute, which is representing this site</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Study" Relationship="DomainModel.ResearchStudySiteParticipation" FromRole="SiteParticipation" ToRole="ResearchStudy" />
+          <Property Name="ResearchStudyUid" Type="Guid" Nullable="false" >
+            <Documentation>
+              <Summary>&lt;see href="https://de.wikipedia.org/wiki/Universally_Unique_Identifier"&gt;Universally Unique Identifier&lt;/see&gt; of the related record</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="EnrollmentDate" Type="DateTime" Nullable="true" >
+            <Documentation>
+              <Summary>a estimated date in future is possible</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="TerminationDate" Type="DateTime" Nullable="true" >
+            <Documentation>
+              <Summary>a estimated date in future is possible</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="TerminatedReason" Type="String" Nullable="true" />
+          <Property Name="StudyRelatedSiteIdentifer" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Offical 'SiteIdentifier' which is unique within the scope of the related study</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DisplayLabel" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>An DisplayLabel which is dedicated for the usage within the frontend of study managent software. Note that this short name representation hat the caracter of an internal shortcurt and could be ambiguous. The usage for legal-relevant/official communication or documents is not recommended, as well as the usage for technical identification of this record.</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="SiteDedicatedInvolvementRoles" Relationship="DomainModel.SiteStudyPersonAssignments" FromRole="Site" ToRole="StudyPersonAssignments" />
+          <Property Name="Status" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>AS DECLARED BY HL7</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SiteRelatedProjectNumber" Type="String" Nullable="true" />
+          <NavigationProperty Name="SystemAssignments" Relationship="DomainModel.SiteSiteApiBinding" FromRole="Site" ToRole="SiteApiBinding" />
+        </EntityType>
+        <Association Name="InstituteSiteParticipation">
+          <End Type="DomainModel.Institute" Role="Institute" Multiplicity="1" />
+          <End Type="DomainModel.Site" Role="SiteParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institute">
+              <PropertyRef Name="InstituteUid" />
+            </Principal>
+            <Dependent Role="SiteParticipation">
+              <PropertyRef Name="RepresentingInstituteUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ResearchStudySiteParticipation">
+          <End Type="DomainModel.ResearchStudy" Role="ResearchStudy" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DomainModel.Site" Role="SiteParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResearchStudy">
+              <PropertyRef Name="ResearchStudyUid" />
+            </Principal>
+            <Dependent Role="SiteParticipation">
+              <PropertyRef Name="ResearchStudyUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InvolvementRole">
+          <Key>
+            <PropertyRef Name="InvolvedPersonRoleUid" />
+          </Key>
+          <Property Name="InvolvedPersonRoleUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+            <Documentation>
+              <Summary>An &lt;see href="https://de.wikipedia.org/wiki/Universally_Unique_Identifier"&gt;Universally Unique Identifier&lt;/see&gt; which can be generated by any origin system and is used to address this ORSCF conform data record in decentralized environments. Note that this Identity must not be changed any more!</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="ResearchStudy" Relationship="DomainModel.ResearchStudyStudyRelatedPerson" FromRole="StudyRelatedPerson" ToRole="ResearchStudy" />
+          <Property Name="ResearchStudyUid" Type="Guid" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="true" />
+          <Property Name="InvolvedFrom" Type="DateTime" Nullable="true" />
+          <Property Name="InvolvedUntil" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="DedicatedToSite" Relationship="DomainModel.SiteStudyPersonAssignments" FromRole="StudyPersonAssignments" ToRole="Site" />
+          <Property Name="DedicatedToSiteUid" Type="Guid" Nullable="true" >
+            <Documentation>
+              <Summary>null indicated a site independent global role</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="InvolvedPerson" Relationship="DomainModel.InvolvedPersonInvolvedPersonRoles" FromRole="InvolvedPersonRoles" ToRole="InvolvedPerson" />
+          <Property Name="InvolvedPersonUid" Type="Guid" Nullable="false" />
+        </EntityType>
+        <Association Name="ResearchStudyStudyRelatedPerson">
+          <End Type="DomainModel.ResearchStudy" Role="ResearchStudy" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DomainModel.InvolvementRole" Role="StudyRelatedPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResearchStudy">
+              <PropertyRef Name="ResearchStudyUid" />
+            </Principal>
+            <Dependent Role="StudyRelatedPerson">
+              <PropertyRef Name="ResearchStudyUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SiteStudyPersonAssignments">
+          <End Type="DomainModel.Site" Role="Site" Multiplicity="0..1" />
+          <End Type="DomainModel.InvolvementRole" Role="StudyPersonAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="SiteUid" />
+            </Principal>
+            <Dependent Role="StudyPersonAssignments">
+              <PropertyRef Name="DedicatedToSiteUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InvolvedPerson">
+          <Key>
+            <PropertyRef Name="InvolvedPersonUid" />
+          </Key>
+          <Property Name="InvolvedPersonUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+            <Documentation>
+              <Summary>An &lt;see href="https://de.wikipedia.org/wiki/Universally_Unique_Identifier"&gt;Universally Unique Identifier&lt;/see&gt; which can be generated by any origin system and is used to address this ORSCF conform data record in decentralized environments. Note that this Identity must not be changed any more!</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="InvolvementRoles" Relationship="DomainModel.InvolvedPersonInvolvedPersonRoles" FromRole="InvolvedPerson" ToRole="InvolvedPersonRoles" />
+          <Property Name="DisplayLabel" Type="String" Nullable="true" />
+          <Property Name="EmailAddress" Type="Guid" Nullable="true" />
+          <Property Name="IsArchived" Type="Boolean" Nullable="false" DefaultValue="false" />
+        </EntityType>
+        <Association Name="InvolvedPersonInvolvedPersonRoles">
+          <End Type="DomainModel.InvolvedPerson" Role="InvolvedPerson" Multiplicity="1" />
+          <End Type="DomainModel.InvolvementRole" Role="InvolvedPersonRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvolvedPerson">
+              <PropertyRef Name="InvolvedPersonUid" />
+            </Principal>
+            <Dependent Role="InvolvedPersonRoles">
+              <PropertyRef Name="InvolvedPersonUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SystemEndpoint">
+          <Key>
+            <PropertyRef Name="SystemEndpointUid" />
+          </Key>
+          <Property Name="SystemEndpointUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="ProviderInstitute" Relationship="DomainModel.InstituteSystemEndpoint" FromRole="SystemEndpoint" ToRole="Institute" />
+          <Property Name="ProviderInstituteUid" Type="Guid" Nullable="false" />
+          <Property Name="AvailableRoles" Type="String" Nullable="false" />
+          <NavigationProperty Name="SiteAssignments" Relationship="DomainModel.SystemEndpointSystemAccessingSite" FromRole="SystemEndpoint" ToRole="SystemAccessingSite" />
+          <NavigationProperty Name="InstituteAssignments" Relationship="DomainModel.SystemEndpointInstituteApiAssignment" FromRole="SystemEndpoint" ToRole="InstituteApiAssignment" />
+          <Property Name="Url" Type="String" Nullable="false" />
+          <Property Name="ApprovedCert" Type="String" Nullable="false" />
+          <Property Name="IsPublic" Type="String" Nullable="false" />
+          <NavigationProperty Name="StudyAssignments" Relationship="DomainModel.SystemEndpointStudyRelatedSystemAssignment" FromRole="SystemEndpoint" ToRole="StudyRelatedSystemAssignment" />
+          <Property Name="Label" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="InstituteSystemEndpoint">
+          <End Type="DomainModel.Institute" Role="Institute" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DomainModel.SystemEndpoint" Role="SystemEndpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institute">
+              <PropertyRef Name="InstituteUid" />
+            </Principal>
+            <Dependent Role="SystemEndpoint">
+              <PropertyRef Name="ProviderInstituteUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SiteRelatedSystemAssignment">
+          <Key>
+            <PropertyRef Name="SiteRelatedSystemAssignmentUid" />
+          </Key>
+          <Property Name="SiteRelatedSystemAssignmentUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="SystemEndpoint" Relationship="DomainModel.SystemEndpointSystemAccessingSite" FromRole="SystemAccessingSite" ToRole="SystemEndpoint" />
+          <Property Name="SystemEndpointUid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Site" Relationship="DomainModel.SiteSiteApiBinding" FromRole="SiteApiBinding" ToRole="Site" />
+          <Property Name="SiteUid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="DedicatedSystemConnection" Relationship="DomainModel.SiteRelatedSystemAssignmentSystemConnection" FromRole="SiteRelatedSystemAssignment" ToRole="SystemConnection" />
+          <Property Name="CustomRoles" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>semicolon separated list of custom role-names</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <Association Name="SystemEndpointSystemAccessingSite">
+          <End Type="DomainModel.SystemEndpoint" Role="SystemEndpoint" Multiplicity="1" />
+          <End Type="DomainModel.SiteRelatedSystemAssignment" Role="SystemAccessingSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemEndpoint">
+              <PropertyRef Name="SystemEndpointUid" />
+            </Principal>
+            <Dependent Role="SystemAccessingSite">
+              <PropertyRef Name="SystemEndpointUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SiteSiteApiBinding">
+          <End Type="DomainModel.Site" Role="Site" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DomainModel.SiteRelatedSystemAssignment" Role="SiteApiBinding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="SiteUid" />
+            </Principal>
+            <Dependent Role="SiteApiBinding">
+              <PropertyRef Name="SiteUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InstituteRelatedSystemAssignment">
+          <Key>
+            <PropertyRef Name="InstituteRelatedSystemAssignemntUid" />
+          </Key>
+          <Property Name="InstituteRelatedSystemAssignemntUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="SystemEndpoint" Relationship="DomainModel.SystemEndpointInstituteApiAssignment" FromRole="InstituteApiAssignment" ToRole="SystemEndpoint" />
+          <Property Name="SystemEndpointUid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Institute" Relationship="DomainModel.InstituteInstituteApiAssignment" FromRole="InstituteApiAssignment" ToRole="Institute" />
+          <Property Name="InstituteUid" Type="Guid" Nullable="false" />
+          <Property Name="UseAsOwnPatientSdr" Type="String" Nullable="false" />
+          <Property Name="UseAsCandidateSdr" Type="String" Nullable="false" />
+          <Property Name="UseAsOwnWdr" Type="String" Nullable="false" />
+          <Property Name="UseAsConsumingExternalWdr" Type="String" Nullable="false" />
+          <Property Name="CustomRoles" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>semicolon separated list of custom role-names</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <Association Name="SystemEndpointInstituteApiAssignment">
+          <End Type="DomainModel.SystemEndpoint" Role="SystemEndpoint" Multiplicity="1" />
+          <End Type="DomainModel.InstituteRelatedSystemAssignment" Role="InstituteApiAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemEndpoint">
+              <PropertyRef Name="SystemEndpointUid" />
+            </Principal>
+            <Dependent Role="InstituteApiAssignment">
+              <PropertyRef Name="SystemEndpointUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InstituteInstituteApiAssignment">
+          <End Type="DomainModel.Institute" Role="Institute" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DomainModel.InstituteRelatedSystemAssignment" Role="InstituteApiAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institute">
+              <PropertyRef Name="InstituteUid" />
+            </Principal>
+            <Dependent Role="InstituteApiAssignment">
+              <PropertyRef Name="InstituteUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SystemEndpointResearchStudy">
+          <End Type="DomainModel.SystemEndpoint" Role="SystemEndpoint" Multiplicity="0..1" />
+          <End Type="DomainModel.ResearchStudy" Role="ResearchStudy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemEndpoint">
+              <PropertyRef Name="SystemEndpointUid" />
+            </Principal>
+            <Dependent Role="ResearchStudy">
+              <PropertyRef Name="OriginWdrEndpointUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SystemConnection">
+          <Key>
+            <PropertyRef Name="SystemConnectionUid" />
+          </Key>
+          <Property Name="SystemConnectionUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="OwnerInstitute" Relationship="DomainModel.InstituteApiConnection" FromRole="ApiConnection" ToRole="Institute" />
+          <Property Name="OwnerInstituteUid" Type="Guid" Nullable="false" />
+          <Property Name="HierSpäterJWTSEttings" Type="String" Nullable="false" />
+          <NavigationProperty Name="TargetEndpoint" Relationship="DomainModel.SystemEndpointApiConnection" FromRole="ApiConnection" ToRole="SystemEndpoint" />
+          <Property Name="TargetSystemEndpointUid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="DedicatedSiteRelatedSystemAssignment" Relationship="DomainModel.SiteRelatedSystemAssignmentSystemConnection" FromRole="SystemConnection" ToRole="SiteRelatedSystemAssignment" />
+          <Property Name="DedicatedSiteRelatedSystemAssignmentUid" Type="Guid" Nullable="true" />
+        </EntityType>
+        <Association Name="InstituteApiConnection">
+          <End Type="DomainModel.Institute" Role="Institute" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DomainModel.SystemConnection" Role="ApiConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institute">
+              <PropertyRef Name="InstituteUid" />
+            </Principal>
+            <Dependent Role="ApiConnection">
+              <PropertyRef Name="OwnerInstituteUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SystemEndpointApiConnection">
+          <End Type="DomainModel.SystemEndpoint" Role="SystemEndpoint" Multiplicity="1" />
+          <End Type="DomainModel.SystemConnection" Role="ApiConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemEndpoint">
+              <PropertyRef Name="SystemEndpointUid" />
+            </Principal>
+            <Dependent Role="ApiConnection">
+              <PropertyRef Name="TargetSystemEndpointUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SiteRelatedSystemAssignmentSystemConnection">
+          <End Type="DomainModel.SiteRelatedSystemAssignment" Role="SiteRelatedSystemAssignment" Multiplicity="0..1" />
+          <End Type="DomainModel.SystemConnection" Role="SystemConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteRelatedSystemAssignment">
+              <PropertyRef Name="SiteRelatedSystemAssignmentUid" />
+            </Principal>
+            <Dependent Role="SystemConnection">
+              <PropertyRef Name="DedicatedSiteRelatedSystemAssignmentUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudyRelatedSystemAssignment">
+          <Key>
+            <PropertyRef Name="StudyRelatedSystemAssignmentUid" />
+          </Key>
+          <Property Name="StudyRelatedSystemAssignmentUid" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="ResearchStudy" Relationship="DomainModel.ResearchStudyStudyRelatedSystemAssignment" FromRole="StudyRelatedSystemAssignment" ToRole="ResearchStudy" />
+          <Property Name="ResearchStudyUid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="SystemEndpoint" Relationship="DomainModel.SystemEndpointStudyRelatedSystemAssignment" FromRole="StudyRelatedSystemAssignment" ToRole="SystemEndpoint" />
+          <Property Name="SystemEndpointUid" Type="Guid" Nullable="false" />
+          <Property Name="CustomRoles" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>semicolon separated list of custom role-names</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <Association Name="ResearchStudyStudyRelatedSystemAssignment">
+          <End Type="DomainModel.ResearchStudy" Role="ResearchStudy" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DomainModel.StudyRelatedSystemAssignment" Role="StudyRelatedSystemAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResearchStudy">
+              <PropertyRef Name="ResearchStudyUid" />
+            </Principal>
+            <Dependent Role="StudyRelatedSystemAssignment">
+              <PropertyRef Name="ResearchStudyUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SystemEndpointStudyRelatedSystemAssignment">
+          <End Type="DomainModel.SystemEndpoint" Role="SystemEndpoint" Multiplicity="1" />
+          <End Type="DomainModel.StudyRelatedSystemAssignment" Role="StudyRelatedSystemAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemEndpoint">
+              <PropertyRef Name="SystemEndpointUid" />
+            </Principal>
+            <Dependent Role="StudyRelatedSystemAssignment">
+              <PropertyRef Name="SystemEndpointUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="DataModel" />
+        <Alias Key="Target" Value="DataModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="Model" StorageEntityContainer="DataModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1e673f0774584ac2be5350aef5de4487" Name="Schema" ZoomLevel="73">
+        <EntityTypeShape EntityType="DomainModel.ResearchStudy" Width="2.5" PointX="7.375" PointY="5.375" FillColor="255, 255, 192" />
+        <EntityTypeShape EntityType="DomainModel.Institute" Width="2.25" PointX="11.5" PointY="2.625" FillColor="255, 255, 192" />
+        <AssociationConnector Association="DomainModel.InstituteResearchStudy" />
+        <EntityTypeShape EntityType="DomainModel.Site" Width="2.375" PointX="11.375" PointY="9.125" FillColor="255, 255, 192" />
+        <AssociationConnector Association="DomainModel.InstituteSiteParticipation" />
+        <AssociationConnector Association="DomainModel.ResearchStudySiteParticipation" />
+        <EntityTypeShape EntityType="DomainModel.InvolvementRole" Width="2.375" PointX="4.375" PointY="8.375" FillColor="255, 255, 192" />
+        <AssociationConnector Association="DomainModel.ResearchStudyStudyRelatedPerson" />
+        <AssociationConnector Association="DomainModel.SiteStudyPersonAssignments" />
+        <EntityTypeShape EntityType="DomainModel.InvolvedPerson" Width="2.375" PointX="4.375" PointY="4.5" FillColor="255, 255, 192" />
+        <AssociationConnector Association="DomainModel.InvolvedPersonInvolvedPersonRoles" />
+        <EntityTypeShape EntityType="DomainModel.SystemEndpoint" Width="2.375" PointX="19.125" PointY="2" FillColor="192, 192, 0" />
+        <AssociationConnector Association="DomainModel.InstituteSystemEndpoint" />
+        <EntityTypeShape EntityType="DomainModel.SiteRelatedSystemAssignment" Width="2.375" PointX="15.125" PointY="10" FillColor="192, 192, 0" />
+        <AssociationConnector Association="DomainModel.SystemEndpointSystemAccessingSite" />
+        <AssociationConnector Association="DomainModel.SiteSiteApiBinding" />
+        <EntityTypeShape EntityType="DomainModel.InstituteRelatedSystemAssignment" Width="2.375" PointX="15.125" PointY="4.25" FillColor="192, 192, 0" />
+        <AssociationConnector Association="DomainModel.SystemEndpointInstituteApiAssignment" />
+        <AssociationConnector Association="DomainModel.InstituteInstituteApiAssignment" />
+        <AssociationConnector Association="DomainModel.SystemEndpointResearchStudy" />
+        <EntityTypeShape EntityType="DomainModel.SystemConnection" Width="2.375" PointX="15.875" PointY="0.75" FillColor="192, 192, 0" />
+        <AssociationConnector Association="DomainModel.InstituteApiConnection" />
+        <AssociationConnector Association="DomainModel.SystemEndpointApiConnection" />
+        <AssociationConnector Association="DomainModel.SiteRelatedSystemAssignmentSystemConnection" />
+        <EntityTypeShape EntityType="DomainModel.StudyRelatedSystemAssignment" Width="2.375" PointX="15.125" PointY="7.375" FillColor="192, 192, 0" />
+        <AssociationConnector Association="DomainModel.ResearchStudyStudyRelatedSystemAssignment" />
+        <AssociationConnector Association="DomainModel.SystemEndpointStudyRelatedSystemAssignment" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Security {
+namespace MedicalResearch.StudyManagement.Security {
 
   [AttributeUsage(validOn: AttributeTargets.Method)]
   public class RequireBaererAuthAttribute : Attribute, IAsyncActionFilter {
@@ -19,7 +19,7 @@ namespace Security {
     }
 
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next) {
-  
+
       if (!context.HttpContext.Request.Headers.TryGetValue("Authorization", out var extractedAuthHeader)) {
         context.Result = new ContentResult() {
           StatusCode = 401,
@@ -131,10 +131,10 @@ namespace Security {
   internal class BearerContent {
 
     /// <summary> issuer </summary>
-    public String iss { get; set; } = string.Empty;
+    public string iss { get; set; } = string.Empty;
 
     /// <summary> subject </summary>
-    public String sub { get; set; } = string.Empty;
+    public string sub { get; set; } = string.Empty;
 
     /// <summary> expires (unix-epoch utc) </summary>
     public long exp { get; set; } = 0;

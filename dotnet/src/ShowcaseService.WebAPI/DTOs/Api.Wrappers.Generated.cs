@@ -1,14 +1,14 @@
 ﻿/* WARNING: THIS IS GENERATED CODE - PLEASE DONT EDIT DIRECTLY - YOUR CHANGES WILL BE LOST! */
 
-using MedicalResearch.StudyManagement.Model;
+using MedicalResearch.StudyManagement.v1;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MedicalResearch.StudyManagement.WebAPI {
-  
+
   namespace InstituteMgmt {
-    
+
     /// <summary>
     /// Contains arguments for calling 'GetInstituteUidByTitle'.
     /// </summary>
@@ -168,11 +168,11 @@ namespace MedicalResearch.StudyManagement.WebAPI {
   }
   
   namespace SiteParticipation {
-    
+
   }
   
   namespace SmsApiInfo {
-    
+
     /// <summary>
     /// Contains arguments for calling 'GetApiVersion'.
     /// Method: returns the version of the ORSCF specification which is implemented by this API,
@@ -290,7 +290,7 @@ namespace MedicalResearch.StudyManagement.WebAPI {
   }
   
   namespace StudyAccess {
-    
+
     /// <summary>
     /// Contains arguments for calling 'SubscribeStudyStateChangedEvents'.
     /// Method: Subscribes the Event when the State of a Study was changed
@@ -352,7 +352,7 @@ namespace MedicalResearch.StudyManagement.WebAPI {
   }
   
   namespace StudySetup {
-    
+
     /// <summary>
     /// Contains arguments for calling 'GetStudyTitleByIdentifier'.
     /// Method: returns null, if there is no matching record

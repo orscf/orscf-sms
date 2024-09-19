@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MedicalResearch.StudyManagement {
+namespace MedicalResearch.StudyManagement.v1 {
 
   public static class SmsCapabilities {
 

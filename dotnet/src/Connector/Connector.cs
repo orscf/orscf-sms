@@ -1,17 +1,17 @@
 ﻿/* WARNING: THIS IS GENERATED CODE - PLEASE DONT EDIT DIRECTLY - YOUR CHANGES WILL BE LOST! */
 
 using MedicalResearch.StudyManagement.InstituteMgmt;
-using MedicalResearch.StudyManagement.Model;
 using MedicalResearch.StudyManagement.SiteParticipation;
 using MedicalResearch.StudyManagement.SmsApiInfo;
 using MedicalResearch.StudyManagement.StudyAccess;
 using MedicalResearch.StudyManagement.StudySetup;
+using MedicalResearch.StudyManagement.v1;
 using Newtonsoft.Json;
 using System;
 using System.Net;
 
 namespace MedicalResearch.StudyManagement {
-  
+
   public partial class SmsApiConnector {
     
     public SmsApiConnector(string url, string apiToken) {
@@ -71,7 +71,7 @@ namespace MedicalResearch.StudyManagement {
   }
   
   namespace InstituteMgmt {
-    
+
     /// <summary> Provides an workflow-level API for interating with a 'StudyManagementSystem' (SMS) </summary>
     internal partial class InstituteMgmtClient : IInstituteMgmtService {
       
@@ -205,7 +205,7 @@ namespace MedicalResearch.StudyManagement {
   }
   
   namespace SiteParticipation {
-    
+
     /// <summary> Provides an workflow-level API for interating with a 'StudyManagementSystem' (SMS) </summary>
     internal partial class SiteParticipationClient : ISiteParticipationService {
       
@@ -229,7 +229,7 @@ namespace MedicalResearch.StudyManagement {
   }
   
   namespace SmsApiInfo {
-    
+
     /// <summary> Provides interoperability information for the current implementation </summary>
     internal partial class SmsApiInfoClient : ISmsApiInfoService {
       
@@ -319,7 +319,7 @@ namespace MedicalResearch.StudyManagement {
   }
   
   namespace StudyAccess {
-    
+
     /// <summary> Provides an workflow-level API for interating with a 'StudyManagementSystem' (SMS) </summary>
     internal partial class StudyAccessClient : IStudyAccessService {
       
@@ -379,7 +379,7 @@ namespace MedicalResearch.StudyManagement {
   }
   
   namespace StudySetup {
-    
+
     /// <summary> Provides an workflow-level API for interating with a 'StudyManagementSystem' (SMS) </summary>
     internal partial class StudySetupClient : IStudySetupService {
       

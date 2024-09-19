@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using H7 = Hl7.Fhir.Model;
 
-namespace MedicalResearch.StudyManagement.Model {
+namespace MedicalResearch.StudyManagement.v1 {
 
   public class InstituteInfo {
 

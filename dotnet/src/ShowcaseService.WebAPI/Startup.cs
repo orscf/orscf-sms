@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using MedicalResearch.StudyManagement.Persistence.EF;
-using MedicalResearch.StudyManagement;
 using System;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Threading.Tasks;
@@ -17,13 +16,13 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.OpenApi.Writers;
 using MedicalResearch.StudyManagement.Model;
 
-namespace MedicalResearch.StudyManagement.WebAPI {
+namespace MedicalResearch.StudyManagement {
 
   public class Startup {
 
     public Startup(IConfiguration configuration) {
       _Configuration = configuration;
-      StudyManagementDbContext.ConnectionString = configuration.GetValue<String>("SqlConnectionString");
+      StudyManagementDbContext.ConnectionString = configuration.GetValue<string>("SqlConnectionString");
     }
 
     private static IConfiguration _Configuration = null;
@@ -51,7 +50,7 @@ namespace MedicalResearch.StudyManagement.WebAPI {
       services.AddControllers();
 
       services.AddSwaggerGen(c => {
-        
+
         c.EnableAnnotations(true, true);
 
         c.IncludeXmlComments(outDir + "Hl7.Fhir.R4.Core.xml", true);
@@ -122,7 +121,7 @@ namespace MedicalResearch.StudyManagement.WebAPI {
       });
 
     }
-    
+
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerfactory) {
 
@@ -159,7 +158,7 @@ namespace MedicalResearch.StudyManagement.WebAPI {
           //represents the sorting in SwaggerUI combo-box
           c.SwaggerEndpoint("schema/ApiV1.json", _ApiTitle + "-API v" + _ApiVersion.ToString(3));
           //c.SwaggerEndpoint("schema/StoreAccessV1.json", _ApiTitle + "-StoreAccess v" + _ApiVersion.ToString(3));
-      
+
           c.RoutePrefix = "docs";
 
           //requires MVC app.UseStaticFiles();

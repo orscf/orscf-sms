@@ -45,6 +45,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Contract\StudyManagement.Contract.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Persistence.EF\Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Context.Generated.cs</LastGenOutput>
@@ -70,13 +74,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="ORSCF.StudyManagement.Contract">
-      <HintPath>..\..\..\(Stage)\Bin\ORSCF.StudyManagement.Contract.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
   </ItemGroup>
 
 </Project>

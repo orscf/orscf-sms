@@ -1,11 +1,10 @@
-﻿using MedicalResearch.StudyManagement.WebAPI;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using System.Text;
 using System.Text.Json;
 
-namespace Security {
+namespace MedicalResearch.StudyManagement.Security {
 
   public class AccessSettings {
 
@@ -39,11 +38,11 @@ namespace Security {
 
     public bool Disabled { get; set; } = false;
 
-    public String[] AllowedHosts { get; set; }
+    public string[] AllowedHosts { get; set; }
 
-    public String[] Permissions { get; set; }
+    public string[] Permissions { get; set; }
 
-    public String[] DenyPermissions { get; set; }
+    public string[] DenyPermissions { get; set; }
 
     public string ScopeToStudyIdentifier { get; set; }
 

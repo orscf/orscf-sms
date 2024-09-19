@@ -1,6 +1,6 @@
 ﻿/* WARNING: THIS IS GENERATED CODE - PLEASE DONT EDIT DIRECTLY - YOUR CHANGES WILL BE LOST! */
 
-using MedicalResearch.StudyManagement;
+using MedicalResearch.StudyManagement.v1;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Security;
@@ -11,9 +11,9 @@ using System.Linq;
 using System.Net;
 
 namespace MedicalResearch.StudyManagement.WebAPI {
-  
+
   namespace InstituteMgmt {
-    
+
     [ApiController]
     [ApiExplorerSettings(GroupName = "ApiV1")]
     [Route("instituteMgmt")]
@@ -147,7 +147,7 @@ namespace MedicalResearch.StudyManagement.WebAPI {
   }
   
   namespace SiteParticipation {
-    
+
     [ApiController]
     [ApiExplorerSettings(GroupName = "ApiV1")]
     [Route("siteParticipation")]
@@ -166,7 +166,7 @@ namespace MedicalResearch.StudyManagement.WebAPI {
   }
   
   namespace SmsApiInfo {
-    
+
     [ApiController]
     [ApiExplorerSettings(GroupName = "ApiV1")]
     [Route("smsApiInfo")]
@@ -262,7 +262,7 @@ namespace MedicalResearch.StudyManagement.WebAPI {
   }
   
   namespace StudyAccess {
-    
+
     [ApiController]
     [ApiExplorerSettings(GroupName = "ApiV1")]
     [Route("studyAccess")]
@@ -319,7 +319,7 @@ namespace MedicalResearch.StudyManagement.WebAPI {
   }
   
   namespace StudySetup {
-    
+
     [ApiController]
     [ApiExplorerSettings(GroupName = "ApiV1")]
     [Route("studySetup")]

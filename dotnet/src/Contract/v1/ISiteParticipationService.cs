@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using H7 = Hl7.Fhir.Model;
 
-namespace MedicalResearch.StudyManagement {
+namespace MedicalResearch.StudyManagement.v1 {
 
   /// <summary> Provides an workflow-level API for interating with a 'StudyManagementSystem' (SMS) </summary>
   public partial interface ISiteParticipationService {

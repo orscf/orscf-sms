@@ -89,7 +89,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimpleSMS.BL\SimpleSMS.BL.csproj" />
+    <ProjectReference Include="..\Contract\StudyManagement.Contract.csproj" />
+    <ProjectReference Include="..\ShowcaseService\StudyManagement.ShowcaseService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -115,10 +116,6 @@
     </Reference>
     <Reference Include="Hl7.FhirPath">
       <HintPath>..\..\..\(Stage)\Bin\Hl7.FhirPath.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-    <Reference Include="ORSCF.StudyManagement.Contract">
-      <HintPath>..\..\..\(Stage)\Bin\ORSCF.StudyManagement.Contract.dll</HintPath>
       <Private>true</Private>
     </Reference>
   </ItemGroup>

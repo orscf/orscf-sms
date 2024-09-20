@@ -17,6 +17,7 @@ using Microsoft.OpenApi.Writers;
 using MedicalResearch.StudyManagement.Model;
 using System.Data.Fuse;
 using System.Data.Fuse.Convenience;
+using System.Web.UJMW;
 
 namespace MedicalResearch.StudyManagement {
 
@@ -43,23 +44,44 @@ namespace MedicalResearch.StudyManagement {
 
       string outDir = AppDomain.CurrentDomain.BaseDirectory;
 
+      services.AddSingleton<IInstituteStore>(new InstituteStore());
+      services.AddSingleton<IResearchStudyStore>(new ResearchStudyStore());
+      services.AddSingleton<ISiteStore>(new SiteStore());
 
-      var y = new System.Data.Fuse.Ef.EfRepository<Institute, Guid>()
+      services.AddSingleton<ISystemEndpointStore>(new SystemEndpointStore());
+      services.AddSingleton<ISystemConnectionStore>(new SystemConnectionStore());
 
-      var x = new DynamicRepositoryFacade<Institute, Guid>()
+      services.AddSingleton<IInvolvedPersonStore>(new InvolvedPersonStore());
+      services.AddSingleton<IInvolvementRoleStore>(new InvolvementRoleStore());
 
+      //services.AddSingleton<IInstituteRelatedSystemAssignmentStore>(new InstituteRelatedSystemAssignmentStore());
+      //services.AddSingleton<IStudyRelatedSystemAssignmentStore>(new StudyRelatedSystemAssignmentStore());
+      //services.AddSingleton<ISiteRelatedSystemAssignmentStore>(new SiteRelatedSystemAssignmentStore());
 
-        services.AddSingleton<IInstituteStore, InstituteStore>();
+      services.AddDynamicUjmwControllers(
+        (c) => {
 
+          var opt = new DynamicUjmwControllerOptions() {
+            ControllerRoute = "sms/v2/store/[Controller]",
+             
+            //ClassNameDiscriminator = "[Controller]"
+          };
 
+          //c.AddControllerFor<IInstituteStore>(opt);
+          c.AddControllerFor<IResearchStudyStore>(opt);
+          //c.AddControllerFor<ISiteStore>(opt);
 
-      //services.AddSingleton<IInstitutes, InstituteStore>();
-      //services.AddSingleton<IResearchStudies, ResearchStudyStore>();
-      //services.AddSingleton<ISites, SiteStore>();
-      //services.AddSingleton<IInvolvedPersons, InvolvedPersonStore>();
-      //services.AddSingleton<IInvolvementRoles, InvolvementRoleStore>();
+          //c.AddControllerFor<ISystemEndpointStore>(opt);
+          //c.AddControllerFor<ISystemConnectionStore>(opt);
 
-      services.AddControllers();
+          //c.AddControllerFor<IInvolvedPersonStore>(opt);
+          //c.AddControllerFor<IInvolvementRoleStore>(opt);
+
+          //c.AddControllerFor<IInstituteRelatedSystemAssignmentStore>(opt);
+          //c.AddControllerFor<IStudyRelatedSystemAssignmentStore>(opt);
+          //c.AddControllerFor<ISiteRelatedSystemAssignmentStore>(opt);
+        }
+      );
 
       services.AddSwaggerGen(c => {
 

@@ -42,7 +42,7 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="EntityAnnotations" Version="4.0.3" />
+    <PackageReference Include="FUSE-fx.EntityAnnotations" Version="4.0.3" />
     <PackageReference Include="FUSE-fx.RepositoryContract" Version="0.3.11" />
     <PackageReference Include="kGEN.Generator" Version="1.5.0.853" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

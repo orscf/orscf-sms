@@ -46,6 +46,7 @@ SchemaRoot schema = JsonConvert.DeserializeObject<SchemaRoot>(rawSchema);
 #>
 using System;
 using System.Data.Fuse;
+using System.Data.Fuse.Convenience;
 using System.Data.Fuse.Ef;
 <#
 
@@ -132,17 +133,16 @@ foreach (EntitySchema entity in schema.Entities) {
 #>
 
   /// <summary> Provides CRUD access to stored <#=entity.NamePlural#> (based on schema version '<#=schema.SemanticVersion #>') </summary>
-  public class <#=repoClassNamePattern.Replace("{E}", entity.Name).Replace("{P}", entity.NamePlural)#> : FuseMappingProxy<<#= itemClassNamePattern.Replace("{E}", entity.Name) #>, <#= itemEntityNamePattern.Replace("{E}", entity.Name) #>, <#= pkFieldType #>>, <#=interfaceNamePattern.Replace("{E}", entity.Name).Replace("{P}", entity.NamePlural)#> {
-
-    //diese klasse hat den zweck, nach außen einen sauberes und vor allem dediziertes
-    //inteface, anstatt des generischen 'IRepository<>' anbieten zu können
+  public class <#=repoClassNamePattern.Replace("{E}", entity.Name).Replace("{P}", entity.NamePlural)#> : ModelVsEntityRepository<<#= itemClassNamePattern.Replace("{E}", entity.Name) #>, <#= itemEntityNamePattern.Replace("{E}", entity.Name) #>, <#= pkFieldType #>>, <#=interfaceNamePattern.Replace("{E}", entity.Name).Replace("{P}", entity.NamePlural)#> {
 
     private static EfRepository<<#= itemEntityNamePattern.Replace("{E}", entity.Name) #>, Guid> CreateInnerEfRepo() {
       var context = new <#= dbContextName #>();
       return new EfRepository<<#= itemEntityNamePattern.Replace("{E}", entity.Name) #>, Guid>(context);
     }
 
-    public <#=repoClassNamePattern.Replace("{E}", entity.Name).Replace("{P}", entity.NamePlural)#>() : base(CreateInnerEfRepo()) {
+    public <#=repoClassNamePattern.Replace("{E}", entity.Name).Replace("{P}", entity.NamePlural)#>() : base(
+      CreateInnerEfRepo(), new ModelVsEntityParams<<#= itemClassNamePattern.Replace("{E}", entity.Name) #>, <#= itemEntityNamePattern.Replace("{E}", entity.Name) #>>()
+    ) {
     }
 
   }

@@ -62,9 +62,7 @@ namespace MedicalResearch.StudyManagement {
         (c) => {
 
           var opt = new DynamicUjmwControllerOptions() {
-            ControllerRoute = "sms/v2/store/[Controller]",
-             
-            //ClassNameDiscriminator = "[Controller]"
+            ControllerRoute = "sms/v2/store/[Controller]"
           };
 
           //c.AddControllerFor<IInstituteStore>(opt);

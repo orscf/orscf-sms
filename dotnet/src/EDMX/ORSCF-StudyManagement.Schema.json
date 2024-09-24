@@ -1,8 +1,124 @@
 {
   "DescriptionFormat": "v1.0",
-  "TimestampUtc": "2024-09-15T00:00:00.0000000Z",
+  "TimestampUtc": "2024-09-22T00:00:00.0000000Z",
   "SemanticVersion": "2.0.0",
   "Entities": [
+    {
+      "Name": "DataEndpoint",
+      "NamePlural": "DataEndpoints",
+      "InheritedEntityName": null,
+      "Summary": "",
+      "IsBlEntrypoint": false,
+      "PrimaryKeyIndexName": "PK_DataEndpoints",
+      "Indices": [
+        {
+          "Name": "PK_DataEndpoints",
+          "Unique": true,
+          "MemberFieldNames": [
+            "Url"
+          ]
+        },
+        {
+          "Name": "FK_DataEndpoints__OwnerInstitute",
+          "Unique": false,
+          "MemberFieldNames": [
+            "OwnerInstituteUid"
+          ]
+        }
+      ],
+      "Fields": [
+        {
+          "Name": "Url",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "Label",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "OwnerInstituteUid",
+          "Type": "Guid",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 1,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "PublicResolvable",
+          "Type": "Boolean",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 1,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "EndpointType",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "SDR | WDR | IMS | VDR | BDR | <CustomName>",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "OAuthUrl",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        }
+      ]
+    },
     {
       "Name": "Institute",
       "NamePlural": "Institutes",
@@ -64,6 +180,175 @@
           "Required": true,
           "DefaultValue": null,
           "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "PrivateSdrUrl",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": false,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "PrivateWdrUrl",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": false,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "PrivateVdrUrl",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": false,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "PrivateBdrUrl",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": false,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        }
+      ]
+    },
+    {
+      "Name": "InstitueRelatedOAuthConfig",
+      "NamePlural": "InstitueRelatedOAuthConfigs",
+      "InheritedEntityName": null,
+      "Summary": "",
+      "IsBlEntrypoint": false,
+      "PrimaryKeyIndexName": "PK_InstitueRelatedOAuthConfigs",
+      "Indices": [
+        {
+          "Name": "PK_InstitueRelatedOAuthConfigs",
+          "Unique": true,
+          "MemberFieldNames": [
+            "InstituteUid",
+            "DataEndpointUrl"
+          ]
+        },
+        {
+          "Name": "FK_InstitueRelatedOAuthConfigs__ForInstitute",
+          "Unique": false,
+          "MemberFieldNames": [
+            "InstituteUid"
+          ]
+        },
+        {
+          "Name": "FK_InstitueRelatedOAuthConfigs_DataEndpoints_ForEndpoint",
+          "Unique": false,
+          "MemberFieldNames": [
+            "DataEndpointUrl"
+          ]
+        }
+      ],
+      "Fields": [
+        {
+          "Name": "InstituteUid",
+          "Type": "Guid",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 1,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "DataEndpointUrl",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "OAuthClientId",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 1,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "OAuthClientSecret",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "OAuthScopesRequired",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": true,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
         }
       ]
     },
@@ -87,13 +372,6 @@
           "Unique": true,
           "MemberFieldNames": [
             "ResearchStudyUid"
-          ]
-        },
-        {
-          "Name": "FK_ResearchStudies__OriginWdr",
-          "Unique": false,
-          "MemberFieldNames": [
-            "OriginWdrEndpointUid"
           ]
         }
       ],
@@ -294,16 +572,76 @@
           "DbGeneratedIdentity": false
         },
         {
-          "Name": "OriginWdrEndpointUid",
-          "Type": "Guid",
+          "Name": "SdrUrl",
+          "Type": "String",
           "MaxLength": 0,
-          "Summary": "",
+          "Summary": "usually provided by the Sponsor",
           "SystemInternal": false,
           "FixedAfterCreation": false,
           "SetabilityFlags": 7,
           "ContentConcern": null,
           "IdentityLabel": false,
-          "Filterable": 1,
+          "Filterable": 2,
+          "Required": false,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "ImsUrl",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "usually provided by the Sponsor",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": false,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "WdrUrl",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "usually provided by the Sponsor",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": false,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "VdrUrl",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "usually provided by the Sponsor",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
+          "Required": false,
+          "DefaultValue": null,
+          "DbGeneratedIdentity": false
+        },
+        {
+          "Name": "BdrUrl",
+          "Type": "String",
+          "MaxLength": 0,
+          "Summary": "usually provided by the Sponsor",
+          "SystemInternal": false,
+          "FixedAfterCreation": false,
+          "SetabilityFlags": 7,
+          "ContentConcern": null,
+          "IdentityLabel": false,
+          "Filterable": 2,
           "Required": false,
           "DefaultValue": null,
           "DbGeneratedIdentity": false
@@ -490,65 +828,9 @@
           "Required": false,
           "DefaultValue": null,
           "DbGeneratedIdentity": false
-        }
-      ]
-    },
-    {
-      "Name": "SystemEndpoint",
-      "NamePlural": "SystemEndpoints",
-      "InheritedEntityName": null,
-      "Summary": "",
-      "IsBlEntrypoint": false,
-      "PrimaryKeyIndexName": "PK_SystemEndpoints",
-      "Indices": [
-        {
-          "Name": "FK__Institutes_ProviderInstitute",
-          "Unique": false,
-          "MemberFieldNames": [
-            "ProviderInstituteUid"
-          ]
         },
         {
-          "Name": "PK_SystemEndpoints",
-          "Unique": true,
-          "MemberFieldNames": [
-            "SystemEndpointUid"
-          ]
-        }
-      ],
-      "Fields": [
-        {
-          "Name": "SystemEndpointUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "ProviderInstituteUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "AvailableRoles",
+          "Name": "DedicatedSdrUrl",
           "Type": "String",
           "MaxLength": 0,
           "Summary": "",
@@ -558,12 +840,12 @@
           "ContentConcern": null,
           "IdentityLabel": false,
           "Filterable": 2,
-          "Required": true,
+          "Required": false,
           "DefaultValue": null,
           "DbGeneratedIdentity": false
         },
         {
-          "Name": "Url",
+          "Name": "DedicatedVdrUrl",
           "Type": "String",
           "MaxLength": 0,
           "Summary": "",
@@ -573,12 +855,12 @@
           "ContentConcern": null,
           "IdentityLabel": false,
           "Filterable": 2,
-          "Required": true,
+          "Required": false,
           "DefaultValue": null,
           "DbGeneratedIdentity": false
         },
         {
-          "Name": "ApprovedCert",
+          "Name": "DedicatedBdrUrl",
           "Type": "String",
           "MaxLength": 0,
           "Summary": "",
@@ -588,304 +870,6 @@
           "ContentConcern": null,
           "IdentityLabel": false,
           "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "IsPublic",
-          "Type": "String",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "Label",
-          "Type": "String",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        }
-      ]
-    },
-    {
-      "Name": "InstituteRelatedSystemAssignment",
-      "NamePlural": "InstituteRelatedSystemAssignments",
-      "InheritedEntityName": null,
-      "Summary": "",
-      "IsBlEntrypoint": false,
-      "PrimaryKeyIndexName": "PK_InstituteRelatedSystemAssignments",
-      "Indices": [
-        {
-          "Name": "FK__Institutes_Institute",
-          "Unique": false,
-          "MemberFieldNames": [
-            "InstituteUid"
-          ]
-        },
-        {
-          "Name": "PK_InstituteRelatedSystemAssignments",
-          "Unique": true,
-          "MemberFieldNames": [
-            "InstituteRelatedSystemAssignemntUid"
-          ]
-        },
-        {
-          "Name": "FK_InstituteRelatedSystemAssignments__SystemEndpoint",
-          "Unique": false,
-          "MemberFieldNames": [
-            "SystemEndpointUid"
-          ]
-        }
-      ],
-      "Fields": [
-        {
-          "Name": "InstituteRelatedSystemAssignemntUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "SystemEndpointUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "InstituteUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "UseAsOwnPatientSdr",
-          "Type": "String",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "UseAsCandidateSdr",
-          "Type": "String",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "UseAsOwnWdr",
-          "Type": "String",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "UseAsConsumingExternalWdr",
-          "Type": "String",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "CustomRoles",
-          "Type": "String",
-          "MaxLength": 0,
-          "Summary": "semicolon separated list of custom role-names",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        }
-      ]
-    },
-    {
-      "Name": "SystemConnection",
-      "NamePlural": "SystemConnections",
-      "InheritedEntityName": null,
-      "Summary": "",
-      "IsBlEntrypoint": false,
-      "PrimaryKeyIndexName": "PK_SystemConnections",
-      "Indices": [
-        {
-          "Name": "FK__Institutes_OwnerInstitute",
-          "Unique": false,
-          "MemberFieldNames": [
-            "OwnerInstituteUid"
-          ]
-        },
-        {
-          "Name": "FK__SiteRelatedSystemAssignments_DedicatedSiteRelatedSystemAssignment",
-          "Unique": false,
-          "MemberFieldNames": [
-            "DedicatedSiteRelatedSystemAssignmentUid"
-          ]
-        },
-        {
-          "Name": "PK_SystemConnections",
-          "Unique": true,
-          "MemberFieldNames": [
-            "SystemConnectionUid"
-          ]
-        },
-        {
-          "Name": "FK_SystemConnections__TargetEndpoint",
-          "Unique": false,
-          "MemberFieldNames": [
-            "TargetSystemEndpointUid"
-          ]
-        }
-      ],
-      "Fields": [
-        {
-          "Name": "SystemConnectionUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "OwnerInstituteUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "JwtSettings",
-          "Type": "String",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "TargetSystemEndpointUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "DedicatedSiteRelatedSystemAssignmentUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
           "Required": false,
           "DefaultValue": null,
           "DbGeneratedIdentity": false
@@ -1115,195 +1099,51 @@
           "DbGeneratedIdentity": false
         }
       ]
-    },
-    {
-      "Name": "StudyRelatedSystemAssignment",
-      "NamePlural": "StudyRelatedSystemAssignments",
-      "InheritedEntityName": null,
-      "Summary": "",
-      "IsBlEntrypoint": false,
-      "PrimaryKeyIndexName": "PK_StudyRelatedSystemAssignments",
-      "Indices": [
-        {
-          "Name": "FK__ResearchStudies_ResearchStudy",
-          "Unique": false,
-          "MemberFieldNames": [
-            "ResearchStudyUid"
-          ]
-        },
-        {
-          "Name": "PK_StudyRelatedSystemAssignments",
-          "Unique": true,
-          "MemberFieldNames": [
-            "StudyRelatedSystemAssignmentUid"
-          ]
-        },
-        {
-          "Name": "FK_StudyRelatedSystemAssignments__SystemEndpoint",
-          "Unique": false,
-          "MemberFieldNames": [
-            "SystemEndpointUid"
-          ]
-        }
-      ],
-      "Fields": [
-        {
-          "Name": "StudyRelatedSystemAssignmentUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "ResearchStudyUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "SystemEndpointUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "CustomRoles",
-          "Type": "String",
-          "MaxLength": 0,
-          "Summary": "semicolon separated list of custom role-names",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        }
-      ]
-    },
-    {
-      "Name": "SiteRelatedSystemAssignment",
-      "NamePlural": "SiteRelatedSystemAssignments",
-      "InheritedEntityName": null,
-      "Summary": "",
-      "IsBlEntrypoint": false,
-      "PrimaryKeyIndexName": "PK_SiteRelatedSystemAssignments",
-      "Indices": [
-        {
-          "Name": "FK__Sites_Site",
-          "Unique": false,
-          "MemberFieldNames": [
-            "SiteUid"
-          ]
-        },
-        {
-          "Name": "PK_SiteRelatedSystemAssignments",
-          "Unique": true,
-          "MemberFieldNames": [
-            "SiteRelatedSystemAssignmentUid"
-          ]
-        },
-        {
-          "Name": "FK_SiteRelatedSystemAssignments__SystemEndpoint",
-          "Unique": false,
-          "MemberFieldNames": [
-            "SystemEndpointUid"
-          ]
-        }
-      ],
-      "Fields": [
-        {
-          "Name": "SiteRelatedSystemAssignmentUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "SystemEndpointUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "SiteUid",
-          "Type": "Guid",
-          "MaxLength": 0,
-          "Summary": "",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 1,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        },
-        {
-          "Name": "CustomRoles",
-          "Type": "String",
-          "MaxLength": 0,
-          "Summary": "semicolon separated list of custom role-names",
-          "SystemInternal": false,
-          "FixedAfterCreation": false,
-          "SetabilityFlags": 7,
-          "ContentConcern": null,
-          "IdentityLabel": false,
-          "Filterable": 2,
-          "Required": true,
-          "DefaultValue": null,
-          "DbGeneratedIdentity": false
-        }
-      ]
     }
   ],
   "Relations": [
+    {
+      "Name": "InstituteDataEndpoint",
+      "PrimaryEntityName": "Institute",
+      "ForeignEntityName": "DataEndpoint",
+      "ForeignKeyIndexName": "FK_DataEndpoints__OwnerInstitute",
+      "IsLookupRelation": true,
+      "PrimaryEntityIsOptional": false,
+      "ForeignEntityIsMultiple": true,
+      "PrimaryNavigationName": "OwnedDataEndpoints",
+      "ForeignNavigationName": "OwnerInstitute",
+      "PrimaryNavigationSummary": "",
+      "ForeignNavigationSummary": "",
+      "CascadeDelete": false
+    },
+    {
+      "Name": "InstituteInstitueRelatedOAuthConfig",
+      "PrimaryEntityName": "Institute",
+      "ForeignEntityName": "InstitueRelatedOAuthConfig",
+      "ForeignKeyIndexName": "FK_InstitueRelatedOAuthConfigs__ForInstitute",
+      "IsLookupRelation": true,
+      "PrimaryEntityIsOptional": false,
+      "ForeignEntityIsMultiple": true,
+      "PrimaryNavigationName": "OAuthConfigs",
+      "ForeignNavigationName": "ForInstitute",
+      "PrimaryNavigationSummary": "",
+      "ForeignNavigationSummary": "",
+      "CascadeDelete": false
+    },
+    {
+      "Name": "DataEndpointInstitueRelatedOAuthConfig",
+      "PrimaryEntityName": "DataEndpoint",
+      "ForeignEntityName": "InstitueRelatedOAuthConfig",
+      "ForeignKeyIndexName": "FK_InstitueRelatedOAuthConfigs_DataEndpoints_ForEndpoint",
+      "IsLookupRelation": true,
+      "PrimaryEntityIsOptional": false,
+      "ForeignEntityIsMultiple": true,
+      "PrimaryNavigationName": "",
+      "ForeignNavigationName": "ForEndpoint",
+      "PrimaryNavigationSummary": "",
+      "ForeignNavigationSummary": "",
+      "CascadeDelete": false
+    },
     {
       "Name": "InstituteResearchStudy",
       "PrimaryEntityName": "Institute",
@@ -1328,62 +1168,6 @@
       "ForeignEntityIsMultiple": true,
       "PrimaryNavigationName": "RepresentedSites",
       "ForeignNavigationName": "RepresentingInstitute",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": false
-    },
-    {
-      "Name": "InstituteSystemEndpoint",
-      "PrimaryEntityName": "Institute",
-      "ForeignEntityName": "SystemEndpoint",
-      "ForeignKeyIndexName": "FK__Institutes_ProviderInstitute",
-      "IsLookupRelation": false,
-      "PrimaryEntityIsOptional": false,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "ProvidedSystemEndpoints",
-      "ForeignNavigationName": "ProviderInstitute",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": true
-    },
-    {
-      "Name": "InstituteInstituteApiAssignment",
-      "PrimaryEntityName": "Institute",
-      "ForeignEntityName": "InstituteRelatedSystemAssignment",
-      "ForeignKeyIndexName": "FK__Institutes_Institute",
-      "IsLookupRelation": false,
-      "PrimaryEntityIsOptional": false,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "SystemAssignment",
-      "ForeignNavigationName": "Institute",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": true
-    },
-    {
-      "Name": "InstituteApiConnection",
-      "PrimaryEntityName": "Institute",
-      "ForeignEntityName": "SystemConnection",
-      "ForeignKeyIndexName": "FK__Institutes_OwnerInstitute",
-      "IsLookupRelation": false,
-      "PrimaryEntityIsOptional": false,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "SystemConnections",
-      "ForeignNavigationName": "OwnerInstitute",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": true
-    },
-    {
-      "Name": "SystemEndpointInstituteApiAssignment",
-      "PrimaryEntityName": "SystemEndpoint",
-      "ForeignEntityName": "InstituteRelatedSystemAssignment",
-      "ForeignKeyIndexName": "FK_InstituteRelatedSystemAssignments__SystemEndpoint",
-      "IsLookupRelation": true,
-      "PrimaryEntityIsOptional": false,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "InstituteAssignments",
-      "ForeignNavigationName": "SystemEndpoint",
       "PrimaryNavigationSummary": "",
       "ForeignNavigationSummary": "",
       "CascadeDelete": false
@@ -1443,104 +1227,6 @@
       "PrimaryNavigationSummary": "",
       "ForeignNavigationSummary": "",
       "CascadeDelete": true
-    },
-    {
-      "Name": "SystemEndpointResearchStudy",
-      "PrimaryEntityName": "SystemEndpoint",
-      "ForeignEntityName": "ResearchStudy",
-      "ForeignKeyIndexName": "FK_ResearchStudies__OriginWdr",
-      "IsLookupRelation": true,
-      "PrimaryEntityIsOptional": true,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "",
-      "ForeignNavigationName": "OriginWdr",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": false
-    },
-    {
-      "Name": "ResearchStudyStudyRelatedSystemAssignment",
-      "PrimaryEntityName": "ResearchStudy",
-      "ForeignEntityName": "StudyRelatedSystemAssignment",
-      "ForeignKeyIndexName": "FK__ResearchStudies_ResearchStudy",
-      "IsLookupRelation": false,
-      "PrimaryEntityIsOptional": false,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "SystemAssignments",
-      "ForeignNavigationName": "ResearchStudy",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": true
-    },
-    {
-      "Name": "SiteSiteApiBinding",
-      "PrimaryEntityName": "Site",
-      "ForeignEntityName": "SiteRelatedSystemAssignment",
-      "ForeignKeyIndexName": "FK__Sites_Site",
-      "IsLookupRelation": false,
-      "PrimaryEntityIsOptional": false,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "SystemAssignments",
-      "ForeignNavigationName": "Site",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": true
-    },
-    {
-      "Name": "SystemEndpointSystemAccessingSite",
-      "PrimaryEntityName": "SystemEndpoint",
-      "ForeignEntityName": "SiteRelatedSystemAssignment",
-      "ForeignKeyIndexName": "FK_SiteRelatedSystemAssignments__SystemEndpoint",
-      "IsLookupRelation": true,
-      "PrimaryEntityIsOptional": false,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "SiteAssignments",
-      "ForeignNavigationName": "SystemEndpoint",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": false
-    },
-    {
-      "Name": "SiteRelatedSystemAssignmentSystemConnection",
-      "PrimaryEntityName": "SiteRelatedSystemAssignment",
-      "ForeignEntityName": "SystemConnection",
-      "ForeignKeyIndexName": "FK__SiteRelatedSystemAssignments_DedicatedSiteRelatedSystemAssignment",
-      "IsLookupRelation": true,
-      "PrimaryEntityIsOptional": true,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "DedicatedSystemConnection",
-      "ForeignNavigationName": "DedicatedSiteRelatedSystemAssignment",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": false
-    },
-    {
-      "Name": "SystemEndpointStudyRelatedSystemAssignment",
-      "PrimaryEntityName": "SystemEndpoint",
-      "ForeignEntityName": "StudyRelatedSystemAssignment",
-      "ForeignKeyIndexName": "FK_StudyRelatedSystemAssignments__SystemEndpoint",
-      "IsLookupRelation": true,
-      "PrimaryEntityIsOptional": false,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "StudyAssignments",
-      "ForeignNavigationName": "SystemEndpoint",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": false
-    },
-    {
-      "Name": "SystemEndpointApiConnection",
-      "PrimaryEntityName": "SystemEndpoint",
-      "ForeignEntityName": "SystemConnection",
-      "ForeignKeyIndexName": "FK_SystemConnections__TargetEndpoint",
-      "IsLookupRelation": true,
-      "PrimaryEntityIsOptional": false,
-      "ForeignEntityIsMultiple": true,
-      "PrimaryNavigationName": "",
-      "ForeignNavigationName": "TargetEndpoint",
-      "PrimaryNavigationSummary": "",
-      "ForeignNavigationSummary": "",
-      "CascadeDelete": false
     }
   ]
 }

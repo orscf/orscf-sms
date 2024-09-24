@@ -9,31 +9,40 @@ namespace MedicalResearch.StudyManagement.Persistence.EF {
 
     public const String SchemaVersion = "2.0.0";
 
+    public DbSet<DataEndpointEntity> DataEndpoints { get; set; }
+
     public DbSet<InstituteEntity> Institutes { get; set; }
+
+    public DbSet<InstitueRelatedOAuthConfigEntity> InstitueRelatedOAuthConfigs { get; set; }
 
     /// <summary> ResearchStudy: entity, which relates to <see href="https://www.hl7.org/fhir/researchstudy.html">HL7.ResearchStudy</see> </summary>
     public DbSet<ResearchStudyEntity> ResearchStudies { get; set; }
 
     public DbSet<SiteEntity> Sites { get; set; }
 
-    public DbSet<SystemEndpointEntity> SystemEndpoints { get; set; }
-
-    public DbSet<InstituteRelatedSystemAssignmentEntity> InstituteRelatedSystemAssignments { get; set; }
-
-    public DbSet<SystemConnectionEntity> SystemConnections { get; set; }
-
     public DbSet<InvolvedPersonEntity> InvolvedPersons { get; set; }
 
     public DbSet<InvolvementRoleEntity> InvolvementRoles { get; set; }
-
-    public DbSet<StudyRelatedSystemAssignmentEntity> StudyRelatedSystemAssignments { get; set; }
-
-    public DbSet<SiteRelatedSystemAssignmentEntity> SiteRelatedSystemAssignments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
       base.OnModelCreating(modelBuilder);
 
 #region Mapping
+
+      //////////////////////////////////////////////////////////////////////////////////////
+      // DataEndpoint
+      //////////////////////////////////////////////////////////////////////////////////////
+
+      var cfgDataEndpoint = modelBuilder.Entity<DataEndpointEntity>();
+      cfgDataEndpoint.ToTable("SmsDataEndpoints");
+      cfgDataEndpoint.HasKey((e) => e.Url);
+
+      // LOOKUP: >>> Institute
+      cfgDataEndpoint
+        .HasOne((lcl) => lcl.OwnerInstitute )
+        .WithMany((rem) => rem.OwnedDataEndpoints )
+        .HasForeignKey(nameof(DataEndpointEntity.OwnerInstituteUid))
+        .OnDelete(DeleteBehavior.Restrict);
 
       //////////////////////////////////////////////////////////////////////////////////////
       // Institute
@@ -42,6 +51,28 @@ namespace MedicalResearch.StudyManagement.Persistence.EF {
       var cfgInstitute = modelBuilder.Entity<InstituteEntity>();
       cfgInstitute.ToTable("SmsInstitutes");
       cfgInstitute.HasKey((e) => e.InstituteUid);
+
+      //////////////////////////////////////////////////////////////////////////////////////
+      // InstitueRelatedOAuthConfig
+      //////////////////////////////////////////////////////////////////////////////////////
+
+      var cfgInstitueRelatedOAuthConfig = modelBuilder.Entity<InstitueRelatedOAuthConfigEntity>();
+      cfgInstitueRelatedOAuthConfig.ToTable("SmsInstitueRelatedOAuthConfigs");
+      cfgInstitueRelatedOAuthConfig.HasKey((e) => new {e.InstituteUid, e.DataEndpointUrl});
+
+      // LOOKUP: >>> Institute
+      cfgInstitueRelatedOAuthConfig
+        .HasOne((lcl) => lcl.ForInstitute )
+        .WithMany((rem) => rem.OAuthConfigs )
+        .HasForeignKey(nameof(InstitueRelatedOAuthConfigEntity.InstituteUid))
+        .OnDelete(DeleteBehavior.Restrict);
+
+      // LOOKUP: >>> DataEndpoint
+      cfgInstitueRelatedOAuthConfig
+        .HasOne((lcl) => lcl.ForEndpoint )
+        .WithMany()
+        .HasForeignKey(nameof(InstitueRelatedOAuthConfigEntity.DataEndpointUrl))
+        .OnDelete(DeleteBehavior.Restrict);
 
       //////////////////////////////////////////////////////////////////////////////////////
       // ResearchStudy
@@ -56,13 +87,6 @@ namespace MedicalResearch.StudyManagement.Persistence.EF {
         .HasOne((lcl) => lcl.InitiatorInstitute )
         .WithMany((rem) => rem.InitiatedStudies )
         .HasForeignKey(nameof(ResearchStudyEntity.InitiatorInstituteUid))
-        .OnDelete(DeleteBehavior.Restrict);
-
-      // LOOKUP: >>> SystemEndpoint
-      cfgResearchStudy
-        .HasOne((lcl) => lcl.OriginWdr )
-        .WithMany()
-        .HasForeignKey(nameof(ResearchStudyEntity.OriginWdrEndpointUid))
         .OnDelete(DeleteBehavior.Restrict);
 
       //////////////////////////////////////////////////////////////////////////////////////
@@ -86,72 +110,6 @@ namespace MedicalResearch.StudyManagement.Persistence.EF {
         .WithMany((rem) => rem.Sites )
         .HasForeignKey(nameof(SiteEntity.ResearchStudyUid))
         .OnDelete(DeleteBehavior.Cascade);
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      // SystemEndpoint
-      //////////////////////////////////////////////////////////////////////////////////////
-
-      var cfgSystemEndpoint = modelBuilder.Entity<SystemEndpointEntity>();
-      cfgSystemEndpoint.ToTable("SmsSystemEndpoints");
-      cfgSystemEndpoint.HasKey((e) => e.SystemEndpointUid);
-
-      // PRINCIPAL: >>> Institute
-      cfgSystemEndpoint
-        .HasOne((lcl) => lcl.ProviderInstitute )
-        .WithMany((rem) => rem.ProvidedSystemEndpoints )
-        .HasForeignKey(nameof(SystemEndpointEntity.ProviderInstituteUid))
-        .OnDelete(DeleteBehavior.Cascade);
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      // InstituteRelatedSystemAssignment
-      //////////////////////////////////////////////////////////////////////////////////////
-
-      var cfgInstituteRelatedSystemAssignment = modelBuilder.Entity<InstituteRelatedSystemAssignmentEntity>();
-      cfgInstituteRelatedSystemAssignment.ToTable("SmsInstituteRelatedSystemAssignments");
-      cfgInstituteRelatedSystemAssignment.HasKey((e) => e.InstituteRelatedSystemAssignemntUid);
-
-      // PRINCIPAL: >>> Institute
-      cfgInstituteRelatedSystemAssignment
-        .HasOne((lcl) => lcl.Institute )
-        .WithMany((rem) => rem.SystemAssignment )
-        .HasForeignKey(nameof(InstituteRelatedSystemAssignmentEntity.InstituteUid))
-        .OnDelete(DeleteBehavior.Cascade);
-
-      // LOOKUP: >>> SystemEndpoint
-      cfgInstituteRelatedSystemAssignment
-        .HasOne((lcl) => lcl.SystemEndpoint )
-        .WithMany((rem) => rem.InstituteAssignments )
-        .HasForeignKey(nameof(InstituteRelatedSystemAssignmentEntity.SystemEndpointUid))
-        .OnDelete(DeleteBehavior.Restrict);
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      // SystemConnection
-      //////////////////////////////////////////////////////////////////////////////////////
-
-      var cfgSystemConnection = modelBuilder.Entity<SystemConnectionEntity>();
-      cfgSystemConnection.ToTable("SmsSystemConnections");
-      cfgSystemConnection.HasKey((e) => e.SystemConnectionUid);
-
-      // PRINCIPAL: >>> Institute
-      cfgSystemConnection
-        .HasOne((lcl) => lcl.OwnerInstitute )
-        .WithMany((rem) => rem.SystemConnections )
-        .HasForeignKey(nameof(SystemConnectionEntity.OwnerInstituteUid))
-        .OnDelete(DeleteBehavior.Cascade);
-
-      // LOOKUP: >>> SiteRelatedSystemAssignment
-      cfgSystemConnection
-        .HasOne((lcl) => lcl.DedicatedSiteRelatedSystemAssignment )
-        .WithMany((rem) => rem.DedicatedSystemConnection )
-        .HasForeignKey(nameof(SystemConnectionEntity.DedicatedSiteRelatedSystemAssignmentUid))
-        .OnDelete(DeleteBehavior.Restrict);
-
-      // LOOKUP: >>> SystemEndpoint
-      cfgSystemConnection
-        .HasOne((lcl) => lcl.TargetEndpoint )
-        .WithMany()
-        .HasForeignKey(nameof(SystemConnectionEntity.TargetSystemEndpointUid))
-        .OnDelete(DeleteBehavior.Restrict);
 
       //////////////////////////////////////////////////////////////////////////////////////
       // InvolvedPerson
@@ -188,50 +146,6 @@ namespace MedicalResearch.StudyManagement.Persistence.EF {
         .HasOne((lcl) => lcl.DedicatedToSite )
         .WithMany((rem) => rem.SiteDedicatedInvolvementRoles )
         .HasForeignKey(nameof(InvolvementRoleEntity.DedicatedToSiteUid))
-        .OnDelete(DeleteBehavior.Restrict);
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      // StudyRelatedSystemAssignment
-      //////////////////////////////////////////////////////////////////////////////////////
-
-      var cfgStudyRelatedSystemAssignment = modelBuilder.Entity<StudyRelatedSystemAssignmentEntity>();
-      cfgStudyRelatedSystemAssignment.ToTable("SmsStudyRelatedSystemAssignments");
-      cfgStudyRelatedSystemAssignment.HasKey((e) => e.StudyRelatedSystemAssignmentUid);
-
-      // PRINCIPAL: >>> ResearchStudy
-      cfgStudyRelatedSystemAssignment
-        .HasOne((lcl) => lcl.ResearchStudy )
-        .WithMany((rem) => rem.SystemAssignments )
-        .HasForeignKey(nameof(StudyRelatedSystemAssignmentEntity.ResearchStudyUid))
-        .OnDelete(DeleteBehavior.Cascade);
-
-      // LOOKUP: >>> SystemEndpoint
-      cfgStudyRelatedSystemAssignment
-        .HasOne((lcl) => lcl.SystemEndpoint )
-        .WithMany((rem) => rem.StudyAssignments )
-        .HasForeignKey(nameof(StudyRelatedSystemAssignmentEntity.SystemEndpointUid))
-        .OnDelete(DeleteBehavior.Restrict);
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      // SiteRelatedSystemAssignment
-      //////////////////////////////////////////////////////////////////////////////////////
-
-      var cfgSiteRelatedSystemAssignment = modelBuilder.Entity<SiteRelatedSystemAssignmentEntity>();
-      cfgSiteRelatedSystemAssignment.ToTable("SmsSiteRelatedSystemAssignments");
-      cfgSiteRelatedSystemAssignment.HasKey((e) => e.SiteRelatedSystemAssignmentUid);
-
-      // PRINCIPAL: >>> Site
-      cfgSiteRelatedSystemAssignment
-        .HasOne((lcl) => lcl.Site )
-        .WithMany((rem) => rem.SystemAssignments )
-        .HasForeignKey(nameof(SiteRelatedSystemAssignmentEntity.SiteUid))
-        .OnDelete(DeleteBehavior.Cascade);
-
-      // LOOKUP: >>> SystemEndpoint
-      cfgSiteRelatedSystemAssignment
-        .HasOne((lcl) => lcl.SystemEndpoint )
-        .WithMany((rem) => rem.SiteAssignments )
-        .HasForeignKey(nameof(SiteRelatedSystemAssignmentEntity.SystemEndpointUid))
         .OnDelete(DeleteBehavior.Restrict);
 
 #endregion

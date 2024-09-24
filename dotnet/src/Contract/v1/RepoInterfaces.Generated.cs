@@ -5,9 +5,23 @@ using System.Collections.ObjectModel;
 
 namespace MedicalResearch.StudyManagement.StoreAccess {
 
+  /// <summary> Provides CRUD access to stored DataEndpoints (based on schema version '2.0.0') </summary>
+  public partial interface IDataEndpointStore : System.Data.Fuse.IRepository<DataEndpoint, String> {
+  }
+
   /// <summary> Provides CRUD access to stored Institutes (based on schema version '2.0.0') </summary>
   public partial interface IInstituteStore : System.Data.Fuse.IRepository<Institute, Guid> {
   }
+
+  /// <summary> Provides CRUD access to stored InstitueRelatedOAuthConfigs (based on schema version '2.0.0') </summary>
+  public partial interface IInstitueRelatedOAuthConfigStore : System.Data.Fuse.IRepository<InstitueRelatedOAuthConfig, InstitueRelatedOAuthConfigIdentity> {
+  }
+
+/// <summary> Composite Key, which represents the primary identity of a InstitueRelatedOAuthConfig </summary>
+public class InstitueRelatedOAuthConfigIdentity {
+  public Guid InstituteUid;
+  public String DataEndpointUrl;
+}
 
   /// <summary> Provides CRUD access to stored ResearchStudies (based on schema version '2.0.0') </summary>
   public partial interface IResearchStudyStore : System.Data.Fuse.IRepository<ResearchStudy, Guid> {
@@ -17,32 +31,12 @@ namespace MedicalResearch.StudyManagement.StoreAccess {
   public partial interface ISiteStore : System.Data.Fuse.IRepository<Site, Guid> {
   }
 
-  /// <summary> Provides CRUD access to stored SystemEndpoints (based on schema version '2.0.0') </summary>
-  public partial interface ISystemEndpointStore : System.Data.Fuse.IRepository<SystemEndpoint, Guid> {
-  }
-
-  /// <summary> Provides CRUD access to stored InstituteRelatedSystemAssignments (based on schema version '2.0.0') </summary>
-  public partial interface IInstituteRelatedSystemAssignmentStore : System.Data.Fuse.IRepository<InstituteRelatedSystemAssignment, Guid> {
-  }
-
-  /// <summary> Provides CRUD access to stored SystemConnections (based on schema version '2.0.0') </summary>
-  public partial interface ISystemConnectionStore : System.Data.Fuse.IRepository<SystemConnection, Guid> {
-  }
-
   /// <summary> Provides CRUD access to stored InvolvedPersons (based on schema version '2.0.0') </summary>
   public partial interface IInvolvedPersonStore : System.Data.Fuse.IRepository<InvolvedPerson, Guid> {
   }
 
   /// <summary> Provides CRUD access to stored InvolvementRoles (based on schema version '2.0.0') </summary>
   public partial interface IInvolvementRoleStore : System.Data.Fuse.IRepository<InvolvementRole, Guid> {
-  }
-
-  /// <summary> Provides CRUD access to stored StudyRelatedSystemAssignments (based on schema version '2.0.0') </summary>
-  public partial interface IStudyRelatedSystemAssignmentStore : System.Data.Fuse.IRepository<StudyRelatedSystemAssignment, Guid> {
-  }
-
-  /// <summary> Provides CRUD access to stored SiteRelatedSystemAssignments (based on schema version '2.0.0') </summary>
-  public partial interface ISiteRelatedSystemAssignmentStore : System.Data.Fuse.IRepository<SiteRelatedSystemAssignment, Guid> {
   }
 
 }

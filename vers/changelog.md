@@ -8,11 +8,11 @@ This files contains a version history including all changes relevant for semanti
 
 ## Upcoming Changes
 
-*(none)*
+* Starting with Gen. 2 Beta-Phase - **breaking Change** ahead!
 
 
 
 ## v 1.8.0
- - MOVED FROM OTHER REPO
+(Moved from old aggregated GitHub REPO [orscf-implementations-dotnet](https://github.com/orscf/orscf-implementations-dotnet))
 
 

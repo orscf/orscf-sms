@@ -12,6 +12,12 @@ This files contains a version history including all changes relevant for semanti
 
 
 
+## v 1.8.1
+released **2024-09-24**, including:
+ - new revision without significant changes
+
+
+
 ## v 1.8.0
  - MOVED FROM OTHER REPO
 

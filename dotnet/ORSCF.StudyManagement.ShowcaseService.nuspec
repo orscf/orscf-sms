@@ -31,7 +31,7 @@
         <dependency id="Microsoft.EntityFrameworkCore.Tools" version="7.0.20" />
         
         <dependency id="kornSW.EntityFrameworkCore.DataAccessFilter" version="[2.0.864,3.0)" />
-        <dependency id="FUSE-fx.EfSupport" version="(0.3.12,2.0]" />
+        <dependency id="FUSE-fx.EfSupport" version="[0.3.12,2.0)" />
         <dependency id="System.Linq.Dynamic.Core" version="1.4.5" />
 
         <dependency id="Snowflake44" version="[3.1.0,4.0)" />

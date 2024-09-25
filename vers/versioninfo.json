@@ -1,13 +1,13 @@
 {
-  "currentVersion": "2.0.0",
-  "currentVersionWithSuffix": "2.0.0",
+  "currentVersion": "2.0.1",
+  "currentVersionWithSuffix": "2.0.1",
   "releaseType": "official",
-  "previousVersion": "1.8.2",
-  "changeGrade": "major",
+  "previousVersion": "2.0.0",
+  "changeGrade": "patch",
   "currentMajor": 2,
   "currentMinor": 0,
-  "currentPatch": 0,
+  "currentPatch": 1,
   "versionDateInfo": "2024-09-25",
-  "versionTimeInfo": "05:05:19",
-  "versionNotes": "- Starting with Gen. 2 Beta-Phase - breaking Change ahead!\n"
+  "versionTimeInfo": "11:03:47",
+  "versionNotes": "- fix multiple names\n"
 }

@@ -8,7 +8,13 @@ This files contains a version history including all changes relevant for semanti
 
 ## Upcoming Changes
 
-* fix multiple names
+*(none)*
+
+
+
+## v 2.0.1
+released **2024-09-25**, including:
+ - fix multiple names
 
 
 

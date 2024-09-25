@@ -40,7 +40,7 @@ namespace MedicalResearch.StudyManagement {
 
       _ApiVersion = typeof(Site).Assembly.GetName().Version;
 
-      //StudyManagementDbContext.Migrate();
+      StudyManagementDbContext.Migrate();
 
       string outDir = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -48,8 +48,8 @@ namespace MedicalResearch.StudyManagement {
       services.AddSingleton<IResearchStudyStore>(new ResearchStudyStore());
       services.AddSingleton<ISiteStore>(new SiteStore());
 
-      services.AddSingleton<ISystemEndpointStore>(new SystemEndpointStore());
-      services.AddSingleton<ISystemConnectionStore>(new SystemConnectionStore());
+      services.AddSingleton<IDataEndpointStore>(new DataEndpointStore());
+      services.AddSingleton<IInstitueRelatedOAuthConfigStore>(new InstitueRelatedOAuthConfigStore());
 
       services.AddSingleton<IInvolvedPersonStore>(new InvolvedPersonStore());
       services.AddSingleton<IInvolvementRoleStore>(new InvolvementRoleStore());
@@ -61,11 +61,16 @@ namespace MedicalResearch.StudyManagement {
       services.AddDynamicUjmwControllers(
         (c) => {
 
+          //var opt1 = new DynamicUjmwControllerOptions() {
+          //  ControllerRoute = "sms/v2/Institutes/",
+          //   ClassNameDiscriminator = "Institutes"
+          //};
+
+          //c.AddControllerFor<IInstituteStore>(opt1);
+
           var opt = new DynamicUjmwControllerOptions() {
             ControllerRoute = "sms/v2/store/[Controller]"
           };
-
-          //c.AddControllerFor<IInstituteStore>(opt);
           c.AddControllerFor<IResearchStudyStore>(opt);
           //c.AddControllerFor<ISiteStore>(opt);
 

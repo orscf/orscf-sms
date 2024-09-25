@@ -43,13 +43,13 @@
 
   <ItemGroup>
     <PackageReference Include="FUSE-fx.EntityAnnotations" Version="4.0.3" />
-    <PackageReference Include="FUSE-fx.RepositoryContract" Version="0.3.11" />
+    <PackageReference Include="FUSE-fx.RepositoryContract" Version="0.3.12" />
     <PackageReference Include="kGEN.Generator" Version="1.5.0.853" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SmartAmbience" Version="2.1.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <PackageReference Include="UJMW.DynamicClient" Version="3.2.0" />
+    <PackageReference Include="UJMW.DynamicClient" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>

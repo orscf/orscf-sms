@@ -43,9 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FUSE-fx.EfSupport" Version="0.3.11" />
+    <PackageReference Include="FUSE-fx.EfSupport" Version="0.3.12" />
     <PackageReference Include="FUSE-fx.EntityAnnotations" Version="4.0.3" />
-    <PackageReference Include="FUSE-fx.RepositoryContract" Version="0.3.11" />
+    <PackageReference Include="FUSE-fx.RepositoryContract" Version="0.3.12" />
     <PackageReference Include="jose-jwt" Version="4.1.0" />
     <PackageReference Include="kGEN.Generator" Version="1.5.0.853" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" NoWarn="NU1605" />
@@ -64,8 +64,8 @@
     <PackageReference Include="Snowflake44" Version="3.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.6.3" />
-    <PackageReference Include="UJMW.DynamicClient" Version="3.2.0" />
-    <PackageReference Include="UJMW.DynamicController" Version="3.2.0" />
+    <PackageReference Include="UJMW.DynamicClient" Version="3.3.0" />
+    <PackageReference Include="UJMW.DynamicController" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>

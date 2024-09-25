@@ -54,35 +54,19 @@ namespace MedicalResearch.StudyManagement {
       services.AddSingleton<IInvolvedPersonStore>(new InvolvedPersonStore());
       services.AddSingleton<IInvolvementRoleStore>(new InvolvementRoleStore());
 
-      //services.AddSingleton<IInstituteRelatedSystemAssignmentStore>(new InstituteRelatedSystemAssignmentStore());
-      //services.AddSingleton<IStudyRelatedSystemAssignmentStore>(new StudyRelatedSystemAssignmentStore());
-      //services.AddSingleton<ISiteRelatedSystemAssignmentStore>(new SiteRelatedSystemAssignmentStore());
-
       services.AddDynamicUjmwControllers(
         (c) => {
 
-          //var opt1 = new DynamicUjmwControllerOptions() {
-          //  ControllerRoute = "sms/v2/Institutes/",
-          //   ClassNameDiscriminator = "Institutes"
-          //};
+          c.AddControllerFor<IInstituteStore>("sms/v2/Institutes");
+          c.AddControllerFor<IResearchStudyStore>("sms/v2/ResearchStudys");
+          c.AddControllerFor<ISiteStore>("sms/v2/Sites");
 
-          //c.AddControllerFor<IInstituteStore>(opt1);
+          c.AddControllerFor<IDataEndpointStore>("sms/v2/DataEndpoints");
+          c.AddControllerFor<IInstitueRelatedOAuthConfigStore>("sms/v2/InstitueRelatedOAuthConfigs");
 
-          var opt = new DynamicUjmwControllerOptions() {
-            ControllerRoute = "sms/v2/store/[Controller]"
-          };
-          c.AddControllerFor<IResearchStudyStore>(opt);
-          //c.AddControllerFor<ISiteStore>(opt);
+          c.AddControllerFor<IInvolvedPersonStore>("sms/v2/InvolvedPersons");
+          c.AddControllerFor<IInvolvementRoleStore>("sms/v2/InvolvementRoles");
 
-          //c.AddControllerFor<ISystemEndpointStore>(opt);
-          //c.AddControllerFor<ISystemConnectionStore>(opt);
-
-          //c.AddControllerFor<IInvolvedPersonStore>(opt);
-          //c.AddControllerFor<IInvolvementRoleStore>(opt);
-
-          //c.AddControllerFor<IInstituteRelatedSystemAssignmentStore>(opt);
-          //c.AddControllerFor<IStudyRelatedSystemAssignmentStore>(opt);
-          //c.AddControllerFor<ISiteRelatedSystemAssignmentStore>(opt);
         }
       );
 

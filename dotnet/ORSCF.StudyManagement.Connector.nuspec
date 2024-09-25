@@ -17,6 +17,7 @@
     <dependencies>
       <group targetFramework="net6.0">
         <dependency id="ORSCF.StudyManagement.Contract" version="999.0.0" />
+        <dependency id="UJMW.DynamicClient" version="[3.3.0,4.0)" />
       </group>
     </dependencies>
   </metadata>

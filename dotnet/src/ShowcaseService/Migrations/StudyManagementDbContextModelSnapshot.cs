@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace MedicalResearch.StudyManagement.Migrations
 {
     [DbContext(typeof(StudyManagementDbContext))]
@@ -15,9 +17,70 @@ namespace MedicalResearch.StudyManagement.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "7.0.20")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.DataEndpointEntity", b =>
+                {
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EndpointType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Label")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OAuthUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("OwnerInstituteUid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("PublicResolvable")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Url");
+
+                    b.HasIndex("OwnerInstituteUid");
+
+                    b.ToTable("SmsDataEndpoints", (string)null);
+                });
+
+            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.InstitueRelatedOAuthConfigEntity", b =>
+                {
+                    b.Property<Guid>("InstituteUid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DataEndpointUrl")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OAuthClientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OAuthClientSecret")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OAuthScopesRequired")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("InstituteUid", "DataEndpointUrl");
+
+                    b.HasIndex("DataEndpointUrl");
+
+                    b.ToTable("SmsInstitueRelatedOAuthConfigs", (string)null);
+                });
 
             modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.InstituteEntity", b =>
                 {
@@ -33,50 +96,21 @@ namespace MedicalResearch.StudyManagement.Migrations
                     b.Property<bool>("IsArchived")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PrivateBdrUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrivateSdrUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrivateVdrUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrivateWdrUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("InstituteUid");
 
-                    b.ToTable("SmsInstitutes");
-                });
-
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.InstituteRelatedSystemAssignmentEntity", b =>
-                {
-                    b.Property<Guid>("InstituteRelatedSystemAssignemntUid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CustomRoles")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("InstituteUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SystemEndpointUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UseAsCandidateSdr")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UseAsConsumingExternalWdr")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UseAsOwnPatientSdr")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UseAsOwnWdr")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("InstituteRelatedSystemAssignemntUid");
-
-                    b.HasIndex("InstituteUid");
-
-                    b.HasIndex("SystemEndpointUid");
-
-                    b.ToTable("SmsInstituteRelatedSystemAssignments");
+                    b.ToTable("SmsInstitutes", (string)null);
                 });
 
             modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.InvolvedPersonEntity", b =>
@@ -96,7 +130,7 @@ namespace MedicalResearch.StudyManagement.Migrations
 
                     b.HasKey("InvolvedPersonUid");
 
-                    b.ToTable("SmsInvolvedPersons");
+                    b.ToTable("SmsInvolvedPersons", (string)null);
                 });
 
             modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.InvolvementRoleEntity", b =>
@@ -131,7 +165,7 @@ namespace MedicalResearch.StudyManagement.Migrations
 
                     b.HasIndex("ResearchStudyUid");
 
-                    b.ToTable("SmsInvolvementRoles");
+                    b.ToTable("SmsInvolvementRoles", (string)null);
                 });
 
             modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.ResearchStudyEntity", b =>
@@ -140,10 +174,16 @@ namespace MedicalResearch.StudyManagement.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("BdrUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DisplayLabel")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ImsUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("InitiatorInstituteUid")
                         .HasColumnType("uniqueidentifier");
@@ -154,10 +194,10 @@ namespace MedicalResearch.StudyManagement.Migrations
                     b.Property<bool>("IsArchived")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("OriginWdrEndpointUid")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Phase")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SdrUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("StartDate")
@@ -185,13 +225,17 @@ namespace MedicalResearch.StudyManagement.Migrations
                     b.Property<DateTime?>("TerminationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("VdrUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WdrUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ResearchStudyUid");
 
                     b.HasIndex("InitiatorInstituteUid");
 
-                    b.HasIndex("OriginWdrEndpointUid");
-
-                    b.ToTable("SmsResearchStudies");
+                    b.ToTable("SmsResearchStudies", (string)null);
                 });
 
             modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SiteEntity", b =>
@@ -199,6 +243,15 @@ namespace MedicalResearch.StudyManagement.Migrations
                     b.Property<Guid>("SiteUid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DedicatedBdrUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DedicatedSdrUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DedicatedVdrUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DisplayLabel")
                         .IsRequired()
@@ -236,142 +289,37 @@ namespace MedicalResearch.StudyManagement.Migrations
 
                     b.HasIndex("ResearchStudyUid");
 
-                    b.ToTable("SmsSites");
+                    b.ToTable("SmsSites", (string)null);
                 });
 
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SiteRelatedSystemAssignmentEntity", b =>
+            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.DataEndpointEntity", b =>
                 {
-                    b.Property<Guid>("SiteRelatedSystemAssignmentUid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CustomRoles")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("SiteUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SystemEndpointUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("SiteRelatedSystemAssignmentUid");
-
-                    b.HasIndex("SiteUid");
-
-                    b.HasIndex("SystemEndpointUid");
-
-                    b.ToTable("SmsSiteRelatedSystemAssignments");
-                });
-
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.StudyRelatedSystemAssignmentEntity", b =>
-                {
-                    b.Property<Guid>("StudyRelatedSystemAssignmentUid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CustomRoles")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ResearchStudyUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SystemEndpointUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("StudyRelatedSystemAssignmentUid");
-
-                    b.HasIndex("ResearchStudyUid");
-
-                    b.HasIndex("SystemEndpointUid");
-
-                    b.ToTable("SmsStudyRelatedSystemAssignments");
-                });
-
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SystemConnectionEntity", b =>
-                {
-                    b.Property<Guid>("SystemConnectionUid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("DedicatedSiteRelatedSystemAssignmentUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("HierSpäterJWTSEttings")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("OwnerInstituteUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TargetSystemEndpointUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("SystemConnectionUid");
-
-                    b.HasIndex("DedicatedSiteRelatedSystemAssignmentUid");
-
-                    b.HasIndex("OwnerInstituteUid");
-
-                    b.HasIndex("TargetSystemEndpointUid");
-
-                    b.ToTable("SmsSystemConnections");
-                });
-
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SystemEndpointEntity", b =>
-                {
-                    b.Property<Guid>("SystemEndpointUid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ApprovedCert")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AvailableRoles")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IsPublic")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Label")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ProviderInstituteUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SystemEndpointUid");
-
-                    b.HasIndex("ProviderInstituteUid");
-
-                    b.ToTable("SmsSystemEndpoints");
-                });
-
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.InstituteRelatedSystemAssignmentEntity", b =>
-                {
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.InstituteEntity", "Institute")
-                        .WithMany("SystemAssignment")
-                        .HasForeignKey("InstituteUid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.SystemEndpointEntity", "SystemEndpoint")
-                        .WithMany("InstituteAssignments")
-                        .HasForeignKey("SystemEndpointUid")
+                    b.HasOne("MedicalResearch.StudyManagement.Persistence.InstituteEntity", "OwnerInstitute")
+                        .WithMany("OwnedDataEndpoints")
+                        .HasForeignKey("OwnerInstituteUid")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Institute");
+                    b.Navigation("OwnerInstitute");
+                });
 
-                    b.Navigation("SystemEndpoint");
+            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.InstitueRelatedOAuthConfigEntity", b =>
+                {
+                    b.HasOne("MedicalResearch.StudyManagement.Persistence.DataEndpointEntity", "ForEndpoint")
+                        .WithMany()
+                        .HasForeignKey("DataEndpointUrl")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MedicalResearch.StudyManagement.Persistence.InstituteEntity", "ForInstitute")
+                        .WithMany("OAuthConfigs")
+                        .HasForeignKey("InstituteUid")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ForEndpoint");
+
+                    b.Navigation("ForInstitute");
                 });
 
             modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.InvolvementRoleEntity", b =>
@@ -408,14 +356,7 @@ namespace MedicalResearch.StudyManagement.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.SystemEndpointEntity", "OriginWdr")
-                        .WithMany()
-                        .HasForeignKey("OriginWdrEndpointUid")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("InitiatorInstitute");
-
-                    b.Navigation("OriginWdr");
                 });
 
             modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SiteEntity", b =>
@@ -437,92 +378,15 @@ namespace MedicalResearch.StudyManagement.Migrations
                     b.Navigation("Study");
                 });
 
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SiteRelatedSystemAssignmentEntity", b =>
-                {
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.SiteEntity", "Site")
-                        .WithMany("SystemAssignments")
-                        .HasForeignKey("SiteUid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.SystemEndpointEntity", "SystemEndpoint")
-                        .WithMany("SiteAssignments")
-                        .HasForeignKey("SystemEndpointUid")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Site");
-
-                    b.Navigation("SystemEndpoint");
-                });
-
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.StudyRelatedSystemAssignmentEntity", b =>
-                {
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.ResearchStudyEntity", "ResearchStudy")
-                        .WithMany("SystemAssignments")
-                        .HasForeignKey("ResearchStudyUid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.SystemEndpointEntity", "SystemEndpoint")
-                        .WithMany("StudyAssignments")
-                        .HasForeignKey("SystemEndpointUid")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("ResearchStudy");
-
-                    b.Navigation("SystemEndpoint");
-                });
-
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SystemConnectionEntity", b =>
-                {
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.SiteRelatedSystemAssignmentEntity", "DedicatedSiteRelatedSystemAssignment")
-                        .WithMany("DedicatedSystemConnection")
-                        .HasForeignKey("DedicatedSiteRelatedSystemAssignmentUid")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.InstituteEntity", "OwnerInstitute")
-                        .WithMany("SystemConnections")
-                        .HasForeignKey("OwnerInstituteUid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.SystemEndpointEntity", "TargetEndpoint")
-                        .WithMany()
-                        .HasForeignKey("TargetSystemEndpointUid")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("DedicatedSiteRelatedSystemAssignment");
-
-                    b.Navigation("OwnerInstitute");
-
-                    b.Navigation("TargetEndpoint");
-                });
-
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SystemEndpointEntity", b =>
-                {
-                    b.HasOne("MedicalResearch.StudyManagement.Persistence.InstituteEntity", "ProviderInstitute")
-                        .WithMany("ProvidedSystemEndpoints")
-                        .HasForeignKey("ProviderInstituteUid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProviderInstitute");
-                });
-
             modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.InstituteEntity", b =>
                 {
                     b.Navigation("InitiatedStudies");
 
-                    b.Navigation("ProvidedSystemEndpoints");
+                    b.Navigation("OAuthConfigs");
+
+                    b.Navigation("OwnedDataEndpoints");
 
                     b.Navigation("RepresentedSites");
-
-                    b.Navigation("SystemAssignment");
-
-                    b.Navigation("SystemConnections");
                 });
 
             modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.InvolvedPersonEntity", b =>
@@ -535,29 +399,11 @@ namespace MedicalResearch.StudyManagement.Migrations
                     b.Navigation("InvolvementRoles");
 
                     b.Navigation("Sites");
-
-                    b.Navigation("SystemAssignments");
                 });
 
             modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SiteEntity", b =>
                 {
                     b.Navigation("SiteDedicatedInvolvementRoles");
-
-                    b.Navigation("SystemAssignments");
-                });
-
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SiteRelatedSystemAssignmentEntity", b =>
-                {
-                    b.Navigation("DedicatedSystemConnection");
-                });
-
-            modelBuilder.Entity("MedicalResearch.StudyManagement.Persistence.SystemEndpointEntity", b =>
-                {
-                    b.Navigation("InstituteAssignments");
-
-                    b.Navigation("SiteAssignments");
-
-                    b.Navigation("StudyAssignments");
                 });
 #pragma warning restore 612, 618
         }

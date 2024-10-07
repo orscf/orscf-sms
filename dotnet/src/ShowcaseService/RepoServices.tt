@@ -135,9 +135,9 @@ foreach (EntitySchema entity in schema.Entities) {
   /// <summary> Provides CRUD access to stored <#=entity.NamePlural#> (based on schema version '<#=schema.SemanticVersion #>') </summary>
   public class <#=repoClassNamePattern.Replace("{E}", entity.Name).Replace("{P}", entity.NamePlural)#> : ModelVsEntityRepository<<#= itemClassNamePattern.Replace("{E}", entity.Name) #>, <#= itemEntityNamePattern.Replace("{E}", entity.Name) #>, <#= pkFieldType #>>, <#=interfaceNamePattern.Replace("{E}", entity.Name).Replace("{P}", entity.NamePlural)#> {
 
-    private static EfRepository<<#= itemEntityNamePattern.Replace("{E}", entity.Name) #>, Guid> CreateInnerEfRepo() {
+    private static EfRepository<<#= itemEntityNamePattern.Replace("{E}", entity.Name) #>, <#= pkFieldType #>> CreateInnerEfRepo() {
       var context = new <#= dbContextName #>();
-      return new EfRepository<<#= itemEntityNamePattern.Replace("{E}", entity.Name) #>, Guid>(context);
+      return new EfRepository<<#= itemEntityNamePattern.Replace("{E}", entity.Name) #>, <#= pkFieldType #>>(context);
     }
 
     public <#=repoClassNamePattern.Replace("{E}", entity.Name).Replace("{P}", entity.NamePlural)#>() : base(

@@ -9,9 +9,9 @@ namespace MedicalResearch.StudyManagement.StoreAccess {
   /// <summary> Provides CRUD access to stored DataEndpoints (based on schema version '2.0.0') </summary>
   public class DataEndpointStore : ModelVsEntityRepository<DataEndpoint, MedicalResearch.StudyManagement.Persistence.DataEndpointEntity, String>, IDataEndpointStore {
 
-    private static EfRepository<MedicalResearch.StudyManagement.Persistence.DataEndpointEntity, string> CreateInnerEfRepo() {
+    private static EfRepository<MedicalResearch.StudyManagement.Persistence.DataEndpointEntity, String> CreateInnerEfRepo() {
       var context = new MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext();
-      return new EfRepository<MedicalResearch.StudyManagement.Persistence.DataEndpointEntity, string>(context);
+      return new EfRepository<MedicalResearch.StudyManagement.Persistence.DataEndpointEntity, String>(context);
     }
 
     public DataEndpointStore() : base(

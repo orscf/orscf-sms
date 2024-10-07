@@ -57,15 +57,13 @@ namespace MedicalResearch.StudyManagement {
       services.AddDynamicUjmwControllers(
         (c) => {
 
-          c.AddControllerFor<IInstituteStore>("sms/v2/Institutes");
-          c.AddControllerFor<IResearchStudyStore>("sms/v2/ResearchStudys");
-          c.AddControllerFor<ISiteStore>("sms/v2/Sites");
-
-          c.AddControllerFor<IDataEndpointStore>("sms/v2/DataEndpoints");
-          c.AddControllerFor<IInstitueRelatedOAuthConfigStore>("sms/v2/InstitueRelatedOAuthConfigs");
-
-          c.AddControllerFor<IInvolvedPersonStore>("sms/v2/InvolvedPersons");
-          c.AddControllerFor<IInvolvementRoleStore>("sms/v2/InvolvementRoles");
+          c.AddControllerFor<IInstituteStore>("sms/v2/store/Institutes");
+          c.AddControllerFor<IResearchStudyStore>("sms/v2/store/ResearchStudys");
+          c.AddControllerFor<ISiteStore>("sms/v2/store/Sites");
+          c.AddControllerFor<IDataEndpointStore>("sms/v2/store/DataEndpoints");
+          c.AddControllerFor<IInstitueRelatedOAuthConfigStore>("sms/v2/store/InstitueRelatedOAuthConfigs");
+          c.AddControllerFor<IInvolvedPersonStore>("sms/v2/store/InvolvedPersons");
+          c.AddControllerFor<IInvolvementRoleStore>("sms/v2/store/InvolvementRoles");
 
         }
       );
@@ -74,10 +72,11 @@ namespace MedicalResearch.StudyManagement {
 
         c.EnableAnnotations(true, true);
 
-        c.IncludeXmlComments(outDir + "Hl7.Fhir.R4.Core.xml", true);
+        c.IncludeXmlComments(outDir + "Hl7.Fhir.R4.xml", true);
         c.IncludeXmlComments(outDir + "ORSCF.StudyManagement.Contract.xml", true);
         c.IncludeXmlComments(outDir + "ORSCF.StudyManagement.Service.xml", true);
         c.IncludeXmlComments(outDir + "ORSCF.StudyManagement.Service.WebAPI.xml", true);
+        c.IncludeXmlComments(outDir + "FUSE-fx.RepositoryContract.xml", true);
 
         #region bearer
 
@@ -126,11 +125,11 @@ namespace MedicalResearch.StudyManagement {
         //);
 
         c.SwaggerDoc(
-          "ApiV1",
+          "ApiV2",
           new OpenApiInfo {
             Title = _ApiTitle + "-API",
             Version = _ApiVersion.ToString(3),
-            Description = "NOTE: This is not intended be a 'RESTful' api, as it is NOT located on the persistence layer and is therefore NOT focused on doing CRUD operations! This HTTP-based API uses a 'call-based' approach to known BL operations. IN-, OUT- and return-arguments are transmitted using request-/response- wrappers (see [UJMW](https://github.com/KornSW/UnifiedJsonMessageWrapper)), which are very lightweight and are a compromise for broad support and adaptability in REST-inspired technologies as well as soap-inspired technologies!",
+            Description = "NOTE: This is not intended be a 'RESTful' api, as it is NOT located on the persistence layer and is therefore NOT focused on doing CRUD operations! This HTTP-based API uses a 'call-based' approach to known BL operations. IN-, OUT- and return-arguments are transmitted using request-/response- wrappers (see [UJMW](https://github.com/SmartStandards/UnifiedJsonMessageWrapper)), which are very lightweight and are a compromise for broad support and adaptability in REST-inspired technologies as well as soap-inspired technologies!",
             Contact = new OpenApiContact {
               Name = "Open Research Study Communication Format",
               Email = "info@orscf.org",
@@ -177,7 +176,7 @@ namespace MedicalResearch.StudyManagement {
           c.DocumentTitle = _ApiTitle + " - OpenAPI Definition(s)";
 
           //represents the sorting in SwaggerUI combo-box
-          c.SwaggerEndpoint("schema/ApiV1.json", _ApiTitle + "-API v" + _ApiVersion.ToString(3));
+          c.SwaggerEndpoint("schema/ApiV2.json", _ApiTitle + "-API v" + _ApiVersion.ToString(3));
           //c.SwaggerEndpoint("schema/StoreAccessV1.json", _ApiTitle + "-StoreAccess v" + _ApiVersion.ToString(3));
 
           c.RoutePrefix = "docs";

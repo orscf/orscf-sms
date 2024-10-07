@@ -39,10 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ORSCF.SimpleVisitDataRepository.WebAPI.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FUSE-fx.EfSupport" Version="0.3.16" />
     <PackageReference Include="FUSE-fx.EntityAnnotations" Version="4.0.3" />
     <PackageReference Include="FUSE-fx.RepositoryContract" Version="0.3.16" />
@@ -79,33 +75,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Contract\StudyManagement.Contract.csproj" />
     <ProjectReference Include="..\ShowcaseService\StudyManagement.ShowcaseService.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Hl7.Fhir.ElementModel">
-      <HintPath>..\..\..\(Stage)\Bin\Hl7.Fhir.ElementModel.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-    <Reference Include="Hl7.Fhir.R4.Core">
-      <HintPath>..\..\..\(Stage)\Bin\Hl7.Fhir.R4.Core.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-    <Reference Include="Hl7.Fhir.Serialization">
-      <HintPath>..\..\..\(Stage)\Bin\Hl7.Fhir.Serialization.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-    <Reference Include="Hl7.Fhir.Support">
-      <HintPath>..\..\..\(Stage)\Bin\Hl7.Fhir.Support.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-    <Reference Include="Hl7.Fhir.Support.Poco">
-      <HintPath>..\..\..\(Stage)\Bin\Hl7.Fhir.Support.Poco.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-    <Reference Include="Hl7.FhirPath">
-      <HintPath>..\..\..\(Stage)\Bin\Hl7.FhirPath.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
   </ItemGroup>
 
 </Project>

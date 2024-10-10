@@ -7,7 +7,12 @@ namespace MedicalResearch.StudyManagement.v1 {
     public static SchemaRoot GetSchemaRoot() {
       return ModelReader.GetSchema(
           typeof(ResearchStudy).Assembly,
-          new string[] { typeof(ResearchStudy).Name, typeof(Institute).Name, typeof(DataEndpoint).Name }
+          new string[] { 
+            typeof(ResearchStudy).Name,
+            typeof(Institute).Name, 
+            typeof(DataEndpoint).Name ,
+            typeof(Site).Name 
+          }
         );
     }
   }

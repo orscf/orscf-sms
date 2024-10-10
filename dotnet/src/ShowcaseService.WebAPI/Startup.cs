@@ -57,15 +57,15 @@ namespace MedicalResearch.StudyManagement {
       services.AddDynamicUjmwControllers(
         (c) => {
 
-          c.AddControllerFor<IInstituteStore>("sms/v2/Institutes");
-          c.AddControllerFor<IResearchStudyStore>("sms/v2/ResearchStudys");
-          c.AddControllerFor<ISiteStore>("sms/v2/Sites");
+          c.AddControllerFor<IInstituteStore>("sms/v2/Institute");
+          c.AddControllerFor<IResearchStudyStore>("sms/v2/ResearchStudy");
+          c.AddControllerFor<ISiteStore>("sms/v2/Site");
 
-          c.AddControllerFor<IDataEndpointStore>("sms/v2/DataEndpoints");
-          c.AddControllerFor<IInstitueRelatedOAuthConfigStore>("sms/v2/InstitueRelatedOAuthConfigs");
+          c.AddControllerFor<IDataEndpointStore>("sms/v2/DataEndpoint");
+          c.AddControllerFor<IInstitueRelatedOAuthConfigStore>("sms/v2/InstitueRelatedOAuthConfig");
 
-          c.AddControllerFor<IInvolvedPersonStore>("sms/v2/InvolvedPersons");
-          c.AddControllerFor<IInvolvementRoleStore>("sms/v2/InvolvementRoles");
+          c.AddControllerFor<IInvolvedPersonStore>("sms/v2/InvolvedPerson");
+          c.AddControllerFor<IInvolvementRoleStore>("sms/v2/InvolvementRole");
 
         }
       );
@@ -74,7 +74,7 @@ namespace MedicalResearch.StudyManagement {
 
         c.EnableAnnotations(true, true);
 
-        c.IncludeXmlComments(outDir + "Hl7.Fhir.R4.Core.xml", true);
+        //c.IncludeXmlComments(outDir + "Hl7.Fhir.R4.Core.xml", true);
         c.IncludeXmlComments(outDir + "ORSCF.StudyManagement.Contract.xml", true);
         c.IncludeXmlComments(outDir + "ORSCF.StudyManagement.Service.xml", true);
         c.IncludeXmlComments(outDir + "ORSCF.StudyManagement.Service.WebAPI.xml", true);

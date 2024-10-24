@@ -3,6 +3,7 @@ using System;
 using System.Data.Fuse;
 using System.Data.Fuse.Convenience;
 using System.Data.Fuse.Ef;
+using System.Data.Fuse.Ef.InstanceManagement;
 
 namespace MedicalResearch.StudyManagement.StoreAccess {
 
@@ -70,8 +71,13 @@ namespace MedicalResearch.StudyManagement.StoreAccess {
   public class SiteStore : ModelVsEntityRepository<Site, MedicalResearch.StudyManagement.Persistence.SiteEntity, Guid>, ISiteStore {
 
     private static EfRepository<MedicalResearch.StudyManagement.Persistence.SiteEntity, Guid> CreateInnerEfRepo() {
-      var context = new MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext();
-      return new EfRepository<MedicalResearch.StudyManagement.Persistence.SiteEntity, Guid>(context);
+      //var context = new MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext();
+      IDbContextInstanceProvider dbContextInstanceProvider = new ShortLivingDbContextInstanceProvider<
+        MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext
+      >();
+      return new EfRepository<
+        MedicalResearch.StudyManagement.Persistence.SiteEntity, Guid
+      >(dbContextInstanceProvider);
     }
 
     public SiteStore() : base(

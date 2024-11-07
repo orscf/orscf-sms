@@ -57,13 +57,15 @@ namespace MedicalResearch.StudyManagement {
       services.AddDynamicUjmwControllers(
         (c) => {
 
-          c.AddControllerFor<IInstituteStore>("sms/v2/store/Institutes");
-          c.AddControllerFor<IResearchStudyStore>("sms/v2/store/ResearchStudys");
-          c.AddControllerFor<ISiteStore>("sms/v2/store/Sites");
-          c.AddControllerFor<IDataEndpointStore>("sms/v2/store/DataEndpoints");
-          c.AddControllerFor<IInstitueRelatedOAuthConfigStore>("sms/v2/store/InstitueRelatedOAuthConfigs");
-          c.AddControllerFor<IInvolvedPersonStore>("sms/v2/store/InvolvedPersons");
-          c.AddControllerFor<IInvolvementRoleStore>("sms/v2/store/InvolvementRoles");
+          c.AddControllerFor<IInstituteStore>("sms/v2/Institute");
+          c.AddControllerFor<IResearchStudyStore>("sms/v2/ResearchStudy");
+          c.AddControllerFor<ISiteStore>("sms/v2/Site");
+
+          c.AddControllerFor<IDataEndpointStore>("sms/v2/DataEndpoint");
+          c.AddControllerFor<IInstitueRelatedOAuthConfigStore>("sms/v2/InstitueRelatedOAuthConfig");
+
+          c.AddControllerFor<IInvolvedPersonStore>("sms/v2/InvolvedPerson");
+          c.AddControllerFor<IInvolvementRoleStore>("sms/v2/InvolvementRole");
 
         }
       );

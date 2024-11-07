@@ -7,7 +7,7 @@
     <Product>Open Research Study Communication Format</Product>
     <Authors>ORSCF.org</Authors>
     <Copyright>ORSCF.org</Copyright>
-    <Version>2.0.0</Version>
+    <Version>2.0.5</Version>
     <AssemblyName>ORSCF.StudyManagement.Contract</AssemblyName>
     <RootNamespace>MedicalResearch.StudyManagement</RootNamespace>
   </PropertyGroup>
@@ -34,7 +34,7 @@
 
   <ItemGroup>
     <PackageReference Include="FUSE-fx.EntityAnnotations" Version="4.0.3" />
-    <PackageReference Include="FUSE-fx.RepositoryContract" Version="0.3.16" />
+    <PackageReference Include="FUSE-fx.RepositoryContract" Version="0.4.4" />
     <PackageReference Include="Hl7.Fhir.R4" Version="5.5.1" />
   </ItemGroup>
 

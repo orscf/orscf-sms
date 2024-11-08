@@ -4,12 +4,14 @@ namespace MedicalResearch.StudyManagement.v1 {
 
   public static class SmsCapabilities {
 
-    public const string InstituteMgmt = "InstituteMgmt";
+    public const string SmsStoreAccess = "SmsStoreAccess";
 
-    public const string StudySetup = "StudySetup";
-    public const string StudyAccess = "StudyAccess";
+    //public const string InstituteMgmt = "InstituteMgmt";
 
-    public const string SiteParticipation = "SiteParticipation";
+    //public const string StudySetup = "StudySetup";
+    //public const string StudyAccess = "StudyAccess";
+
+    //public const string SiteParticipation = "SiteParticipation";
 
   }
 
@@ -25,7 +27,7 @@ namespace MedicalResearch.StudyManagement.v1 {
     /// <summary>
     /// returns a list of API-features (there are several 'services' for different use cases, described by ORSCF)
     /// supported by this implementation. The following values are possible:
-    /// 'InstituteMgmt', 'StudySetup', 'StudyAccess', 'SiteParticipation'
+    /// 'SmsStoreAccess'
     /// </summary>
     string[] GetCapabilities();
 

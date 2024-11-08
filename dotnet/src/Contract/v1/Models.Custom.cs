@@ -6,9 +6,12 @@
 
 //namespace MedicalResearch.StudyManagement.v1 {
 
-//  /// <summary> Provides an workflow-level API for interating with a 'StudyManagementSystem' (SMS) </summary>
-//  public partial interface ISiteParticipationService {
+//  //public class InstituteInfo {
 
-//  }
+//  //  public Guid instituteUid { get; set; }
+//  //  public string instituteTitle { get; set; }
+
+//  //}
+
 
 //}

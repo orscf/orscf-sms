@@ -5,6 +5,10 @@ using System.Collections.ObjectModel;
 
 namespace MedicalResearch.StudyManagement.StoreAccess {
 
+  public static class ApiVersion {
+    public const string SemanticVersion = "2.0.0";
+  }
+
   /// <summary> Provides CRUD access to stored DataEndpoints (based on schema version '2.0.0') </summary>
   public partial interface IDataEndpointStore : System.Data.Fuse.IRepository<DataEndpoint, String> {
   }

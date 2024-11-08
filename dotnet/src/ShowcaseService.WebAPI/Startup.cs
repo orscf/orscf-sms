@@ -38,35 +38,21 @@ namespace MedicalResearch.StudyManagement {
 
       services.AddLogging();
 
-      _ApiVersion = typeof(Site).Assembly.GetName().Version;
+      _ApiVersion = Version.Parse(ApiVersion.SemanticVersion);
 
       StudyManagementDbContext.Migrate();
 
       string outDir = AppDomain.CurrentDomain.BaseDirectory;
 
-      services.AddSingleton<IInstituteStore>(new InstituteStore());
-      services.AddSingleton<IResearchStudyStore>(new ResearchStudyStore());
-      services.AddSingleton<ISiteStore>(new SiteStore());
-
-      services.AddSingleton<IDataEndpointStore>(new DataEndpointStore());
-      services.AddSingleton<IInstitueRelatedOAuthConfigStore>(new InstitueRelatedOAuthConfigStore());
-
-      services.AddSingleton<IInvolvedPersonStore>(new InvolvedPersonStore());
-      services.AddSingleton<IInvolvementRoleStore>(new InvolvementRoleStore());
+      SmsShowcaseEndpointFactory.GetFactoryMethodsPerEndpoint((contractType, factory) => {
+        services.AddSingleton(contractType, (s) => factory());
+      });
 
       services.AddDynamicUjmwControllers(
-        (c) => {
-
-          c.AddControllerFor<IInstituteStore>("sms/v2/Institute");
-          c.AddControllerFor<IResearchStudyStore>("sms/v2/ResearchStudy");
-          c.AddControllerFor<ISiteStore>("sms/v2/Site");
-
-          c.AddControllerFor<IDataEndpointStore>("sms/v2/DataEndpoint");
-          c.AddControllerFor<IInstitueRelatedOAuthConfigStore>("sms/v2/InstitueRelatedOAuthConfig");
-
-          c.AddControllerFor<IInvolvedPersonStore>("sms/v2/InvolvedPerson");
-          c.AddControllerFor<IInvolvementRoleStore>("sms/v2/InvolvementRole");
-
+        (r) => {
+          SmsEndpointRegister.GetContractsPerEndpoint((contractType, subroute) => {
+            r.AddControllerFor(contractType, "sms/v2/" + subroute);
+          });
         }
       );
 
@@ -79,6 +65,7 @@ namespace MedicalResearch.StudyManagement {
         c.IncludeXmlComments(outDir + "ORSCF.StudyManagement.Service.xml", true);
         c.IncludeXmlComments(outDir + "ORSCF.StudyManagement.Service.WebAPI.xml", true);
         c.IncludeXmlComments(outDir + "FUSE-fx.RepositoryContract.xml", true);
+
 
         #region bearer
 
@@ -127,7 +114,7 @@ namespace MedicalResearch.StudyManagement {
         //);
 
         c.SwaggerDoc(
-          "ApiV2",
+          "ApiV" + _ApiVersion.ToString(1),
           new OpenApiInfo {
             Title = _ApiTitle + "-API",
             Version = _ApiVersion.ToString(3),
@@ -164,7 +151,7 @@ namespace MedicalResearch.StudyManagement {
 
         app.UseSwagger(o => {
           //warning: needs subfolder! jsons cant be within same dir as swaggerui (below)
-          o.RouteTemplate = "docs/schema/{documentName}.{json|yaml}";
+          o.RouteTemplate = "docs/schema/{documentName}.swagger.{json|yaml}";
           //o.SerializeAsV2 = true;
         });
 
@@ -178,8 +165,7 @@ namespace MedicalResearch.StudyManagement {
           c.DocumentTitle = _ApiTitle + " - OpenAPI Definition(s)";
 
           //represents the sorting in SwaggerUI combo-box
-          c.SwaggerEndpoint("schema/ApiV2.json", _ApiTitle + "-API v" + _ApiVersion.ToString(3));
-          //c.SwaggerEndpoint("schema/StoreAccessV1.json", _ApiTitle + "-StoreAccess v" + _ApiVersion.ToString(3));
+          c.SwaggerEndpoint($"schema/ApiV{_ApiVersion.ToString(1)}.swagger.json", $"{_ApiTitle}-API v{_ApiVersion.ToString(3)}");
 
           c.RoutePrefix = "docs";
 

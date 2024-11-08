@@ -102,4 +102,9 @@
     <Error Condition="!Exists('..\..\vendor\nuget\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\vendor\nuget\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
   <Import Project="..\..\vendor\nuget\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\..\vendor\nuget\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+    <Target Name="CopyDocs"  AfterTargets="Build">
+    <Copy SourceFiles="$(ProjectDir)\ORSCF-StudyManagement.Schema.json" DestinationFiles="$(ProjectDir)\..\..\..\doc\EntitySchema.json" />
+    <Copy SourceFiles="ORSCF-StudyManagement.md"  DestinationFiles="$(ProjectDir)\..\..\..\doc\EntitySchema.md" />
+  </Target> 
+
 </Project>

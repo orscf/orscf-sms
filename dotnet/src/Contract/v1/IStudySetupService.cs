@@ -1,28 +1,28 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using H7 = Hl7.Fhir.Model;
+﻿//using System;
+//using System.ComponentModel.DataAnnotations;
+//using System.Collections.ObjectModel;
+//using System.Collections.Generic;
+//using H7 = Hl7.Fhir.Model;
 
-namespace MedicalResearch.StudyManagement.v1 {
+//namespace MedicalResearch.StudyManagement.v1 {
 
-  /// <summary> Provides an workflow-level API for interating with a 'StudyManagementSystem' (SMS) </summary>
-  public partial interface IStudySetupService {
+//  /// <summary> Provides an workflow-level API for interating with a 'StudyManagementSystem' (SMS) </summary>
+//  public partial interface IStudySetupService {
 
-    /// <summary>
-    /// returns null, if there is no matching record
-    /// </summary>
-    /// <param name="studyIdentifier"></param>
-    /// <returns></returns>
-    string GetStudyTitleByIdentifier(string studyIdentifier);
-
-
+//    /// <summary>
+//    /// returns null, if there is no matching record
+//    /// </summary>
+//    /// <param name="studyIdentifier"></param>
+//    /// <returns></returns>
+//    string GetStudyTitleByIdentifier(string studyIdentifier);
 
 
 
 
 
 
-  }
 
-}
+
+//  }
+
+//}

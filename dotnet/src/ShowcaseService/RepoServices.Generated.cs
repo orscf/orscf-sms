@@ -11,8 +11,10 @@ namespace MedicalResearch.StudyManagement.StoreAccess {
   public class DataEndpointStore : ModelVsEntityRepository<DataEndpoint, MedicalResearch.StudyManagement.Persistence.DataEndpointEntity, String>, IDataEndpointStore {
 
     private static EfRepository<MedicalResearch.StudyManagement.Persistence.DataEndpointEntity, String> CreateInnerEfRepo() {
-      var context = new MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext();
-      return new EfRepository<MedicalResearch.StudyManagement.Persistence.DataEndpointEntity, String>(context);
+      IDbContextInstanceProvider dbContextInstanceProvider = new ShortLivingDbContextInstanceProvider<
+        MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext
+      >();
+      return new EfRepository<MedicalResearch.StudyManagement.Persistence.DataEndpointEntity, String>(dbContextInstanceProvider);
     }
 
     public DataEndpointStore() : base(
@@ -26,8 +28,10 @@ namespace MedicalResearch.StudyManagement.StoreAccess {
   public class InstituteStore : ModelVsEntityRepository<Institute, MedicalResearch.StudyManagement.Persistence.InstituteEntity, Guid>, IInstituteStore {
 
     private static EfRepository<MedicalResearch.StudyManagement.Persistence.InstituteEntity, Guid> CreateInnerEfRepo() {
-      var context = new MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext();
-      return new EfRepository<MedicalResearch.StudyManagement.Persistence.InstituteEntity, Guid>(context);
+      IDbContextInstanceProvider dbContextInstanceProvider = new ShortLivingDbContextInstanceProvider<
+        MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext
+      >();
+      return new EfRepository<MedicalResearch.StudyManagement.Persistence.InstituteEntity, Guid>(dbContextInstanceProvider);
     }
 
     public InstituteStore() : base(
@@ -41,8 +45,10 @@ namespace MedicalResearch.StudyManagement.StoreAccess {
   public class InstitueRelatedOAuthConfigStore : ModelVsEntityRepository<InstitueRelatedOAuthConfig, MedicalResearch.StudyManagement.Persistence.InstitueRelatedOAuthConfigEntity, InstitueRelatedOAuthConfigIdentity>, IInstitueRelatedOAuthConfigStore {
 
     private static EfRepository<MedicalResearch.StudyManagement.Persistence.InstitueRelatedOAuthConfigEntity, InstitueRelatedOAuthConfigIdentity> CreateInnerEfRepo() {
-      var context = new MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext();
-      return new EfRepository<MedicalResearch.StudyManagement.Persistence.InstitueRelatedOAuthConfigEntity, InstitueRelatedOAuthConfigIdentity>(context);
+      IDbContextInstanceProvider dbContextInstanceProvider = new ShortLivingDbContextInstanceProvider<
+        MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext
+      >();
+      return new EfRepository<MedicalResearch.StudyManagement.Persistence.InstitueRelatedOAuthConfigEntity, InstitueRelatedOAuthConfigIdentity>(dbContextInstanceProvider);
     }
 
     public InstitueRelatedOAuthConfigStore() : base(
@@ -56,8 +62,10 @@ namespace MedicalResearch.StudyManagement.StoreAccess {
   public class ResearchStudyStore : ModelVsEntityRepository<ResearchStudy, MedicalResearch.StudyManagement.Persistence.ResearchStudyEntity, Guid>, IResearchStudyStore {
 
     private static EfRepository<MedicalResearch.StudyManagement.Persistence.ResearchStudyEntity, Guid> CreateInnerEfRepo() {
-      var context = new MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext();
-      return new EfRepository<MedicalResearch.StudyManagement.Persistence.ResearchStudyEntity, Guid>(context);
+      IDbContextInstanceProvider dbContextInstanceProvider = new ShortLivingDbContextInstanceProvider<
+        MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext
+      >();
+      return new EfRepository<MedicalResearch.StudyManagement.Persistence.ResearchStudyEntity, Guid>(dbContextInstanceProvider);
     }
 
     public ResearchStudyStore() : base(
@@ -71,13 +79,10 @@ namespace MedicalResearch.StudyManagement.StoreAccess {
   public class SiteStore : ModelVsEntityRepository<Site, MedicalResearch.StudyManagement.Persistence.SiteEntity, Guid>, ISiteStore {
 
     private static EfRepository<MedicalResearch.StudyManagement.Persistence.SiteEntity, Guid> CreateInnerEfRepo() {
-      //var context = new MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext();
       IDbContextInstanceProvider dbContextInstanceProvider = new ShortLivingDbContextInstanceProvider<
         MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext
       >();
-      return new EfRepository<
-        MedicalResearch.StudyManagement.Persistence.SiteEntity, Guid
-      >(dbContextInstanceProvider);
+      return new EfRepository<MedicalResearch.StudyManagement.Persistence.SiteEntity, Guid>(dbContextInstanceProvider);
     }
 
     public SiteStore() : base(
@@ -91,8 +96,10 @@ namespace MedicalResearch.StudyManagement.StoreAccess {
   public class InvolvedPersonStore : ModelVsEntityRepository<InvolvedPerson, MedicalResearch.StudyManagement.Persistence.InvolvedPersonEntity, Guid>, IInvolvedPersonStore {
 
     private static EfRepository<MedicalResearch.StudyManagement.Persistence.InvolvedPersonEntity, Guid> CreateInnerEfRepo() {
-      var context = new MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext();
-      return new EfRepository<MedicalResearch.StudyManagement.Persistence.InvolvedPersonEntity, Guid>(context);
+      IDbContextInstanceProvider dbContextInstanceProvider = new ShortLivingDbContextInstanceProvider<
+        MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext
+      >();
+      return new EfRepository<MedicalResearch.StudyManagement.Persistence.InvolvedPersonEntity, Guid>(dbContextInstanceProvider);
     }
 
     public InvolvedPersonStore() : base(
@@ -106,8 +113,10 @@ namespace MedicalResearch.StudyManagement.StoreAccess {
   public class InvolvementRoleStore : ModelVsEntityRepository<InvolvementRole, MedicalResearch.StudyManagement.Persistence.InvolvementRoleEntity, Guid>, IInvolvementRoleStore {
 
     private static EfRepository<MedicalResearch.StudyManagement.Persistence.InvolvementRoleEntity, Guid> CreateInnerEfRepo() {
-      var context = new MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext();
-      return new EfRepository<MedicalResearch.StudyManagement.Persistence.InvolvementRoleEntity, Guid>(context);
+      IDbContextInstanceProvider dbContextInstanceProvider = new ShortLivingDbContextInstanceProvider<
+        MedicalResearch.StudyManagement.Persistence.EF.StudyManagementDbContext
+      >();
+      return new EfRepository<MedicalResearch.StudyManagement.Persistence.InvolvementRoleEntity, Guid>(dbContextInstanceProvider);
     }
 
     public InvolvementRoleStore() : base(

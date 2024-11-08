@@ -427,14 +427,14 @@ active | administratively-completed | approved | closed-to-accrual | closed-to-a
         <EntityTypeShape EntityType="DomainModel.Site" Width="2.375" PointX="9.875" PointY="4.625" FillColor="255, 255, 192" />
         <AssociationConnector Association="DomainModel.InstituteSiteParticipation" />
         <AssociationConnector Association="DomainModel.ResearchStudySiteParticipation" />
-        <EntityTypeShape EntityType="DomainModel.InvolvementRole" Width="2.375" PointX="4.625" PointY="4.875" FillColor="192, 255, 255" />
+        <EntityTypeShape EntityType="DomainModel.InvolvementRole" Width="2.375" PointX="6.625" PointY="4.625" FillColor="192, 255, 255" />
         <AssociationConnector Association="DomainModel.ResearchStudyStudyRelatedPerson" />
         <AssociationConnector Association="DomainModel.SiteStudyPersonAssignments" />
-        <EntityTypeShape EntityType="DomainModel.InvolvedPerson" Width="2.375" PointX="4.625" PointY="1.25" FillColor="128, 255, 255" />
+        <EntityTypeShape EntityType="DomainModel.InvolvedPerson" Width="2.375" PointX="6.625" PointY="1.875" FillColor="128, 255, 255" />
         <AssociationConnector Association="DomainModel.InvolvedPersonInvolvedPersonRoles" />
-        <EntityTypeShape EntityType="DomainModel.DataEndpoint" Width="2.375" PointX="17.25" PointY="0.5" />
+        <EntityTypeShape EntityType="DomainModel.DataEndpoint" Width="2.375" PointX="16" PointY="0.5" />
         <AssociationConnector Association="DomainModel.InstituteDataEndpoint" />
-        <EntityTypeShape EntityType="DomainModel.InstitueRelatedOAuthConfig" Width="2.375" PointX="17.25" PointY="3.375" />
+        <EntityTypeShape EntityType="DomainModel.InstitueRelatedOAuthConfig" Width="2.375" PointX="16" PointY="3.375" />
         <AssociationConnector Association="DomainModel.InstituteInstitueRelatedOAuthConfig" />
         <AssociationConnector Association="DomainModel.DataEndpointInstitueRelatedOAuthConfig" />
       </Diagram>

@@ -19,9 +19,9 @@
          // BASE-SETTINGS /////////////////////////////////////////////////////////////////////
 
            // Source:
-           inputFile = Host.ResolvePath("..\\..\\..\\(Stage)\\Bin\\ORSCF.StudyManagement.Contract.dll"),
-           interfaceTypeNamePattern = "MedicalResearch.StudyManagement.I*Service",
-
+           inputFile = Path.GetFullPath(Host.ResolvePath("..\\..\\dist\\bin-net6.0\\ORSCF.StudyManagement.Contract.dll")),
+           interfaceTypeNamePattern = "MedicalResearch.StudyManagement.StoreAccess.I*",
+           
            requireXmlDocForNamespaces = new string[] { 
              "MedicalResearch.StudyManagement"
            },
@@ -34,7 +34,8 @@
            countOfPrefixCharsToRemove = 1,
 
            namespaceWildcardsForModelImport = new string[] { 
-             "MedicalResearch.StudyManagement.*"
+             "MedicalResearch.StudyManagement.*",
+             "System.Data.Fuse.*"
            }
 
          //////////////////////////////////////////////////////////////////////////////////////
